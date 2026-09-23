@@ -1,0 +1,6 @@
+Crust — thickness + style (thin, hand-tossed, deep dish, flatbread, stuffed)
+Sauce — tomato, white/alfredo, pesto, olive oil & garlic, BBQ, no sauce
+Cheese — mozzarella, provolone, ricotta, parmesan, goat cheese, dairy-free
+Proteins — pepperoni, sausage, chicken, bacon, anchovies, prosciutto
+Vegetables — bell peppers, mushrooms, onions, olives, spinach, artichoke, jalapeño
+Finishing toppings — added after the main build, like a real pizzeria would
