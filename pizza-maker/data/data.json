@@ -143,6 +143,11 @@
           "id": "dairy-free",
           "label": "Dairy-Free",
           "description": "Plant-based mozzarella alternative"
+        },
+        {
+          "id": "extra-cheese",
+          "label": "Extra Cheese",
+          "description": "You know you want to!"
         }
       ]
     },

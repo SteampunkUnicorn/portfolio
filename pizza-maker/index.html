@@ -17,20 +17,37 @@
       </nav>
 
       <div class="pizza-builder--play-surface">
-        <div class="pizza-builder--size"></div>
-        <div class="pizza-builder--crust"></div>
-        <div class="pizza-builder--sauce"></div>
-        <div class="pizza-builder--cheese"></div>
-        <div class="pizza-builder--proteins"></div>
-        <div class="pizza-builder--vegetables"></div>
+        <div
+          class="pizza-builder--ingredient-section pizza-builder--size"
+        ></div>
+        <div
+          class="pizza-builder--ingredient-section pizza-builder--crust"
+        ></div>
+        <div
+          class="pizza-builder--ingredient-section pizza-builder--sauce"
+        ></div>
+        <div
+          class="pizza-builder--ingredient-section pizza-builder--cheese"
+        ></div>
+        <div
+          class="pizza-builder--ingredient-section pizza-builder--proteins"
+        ></div>
+        <div
+          class="pizza-builder--ingredient-section pizza-builder--vegetables"
+        ></div>
 
-        <div class="pizza-builder--extras">
+        <div class="pizza-builder--ingredient-section pizza-builder--extras">
           <div class="pizza-builder--crust-seasons"></div>
           <div class="pizza-builder--fresh-finishes"></div>
           <div class="pizza-builder--drizzle"></div>
         </div>
       </div>
-
+      <div class="pizza-builder--built-pizza">
+        <ul></ul>
+        <button type="button" class="pizza-builder--complete" hidden>
+          Complete Pizza
+        </button>
+      </div>
       <div class="pizza-builder--done">
         <p>Give your pizza a name</p>
         <input type="text" />
