@@ -3,10 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cooking Game</title>
+    <title>Pizza</title>
     <link rel="stylesheet" href="styles/style.css" />
   </head>
   <body>
+    <section class="pizza-builder">
+      <div class="pizza-builder--game-directions">
+        <!-- Populated from the current step -->
+      </div>
+
+      <nav class="pizza-builder--navigation">
+        <!-- Generated from JSON steps -->
+      </nav>
+
+      <div class="pizza-builder--play-surface">
+        <div class="pizza-builder--size"></div>
+        <div class="pizza-builder--crust"></div>
+        <div class="pizza-builder--sauce"></div>
+        <div class="pizza-builder--cheese"></div>
+        <div class="pizza-builder--proteins"></div>
+        <div class="pizza-builder--vegetables"></div>
+
+        <div class="pizza-builder--extras">
+          <div class="pizza-builder--crust-seasons"></div>
+          <div class="pizza-builder--fresh-finishes"></div>
+          <div class="pizza-builder--drizzle"></div>
+        </div>
+      </div>
+
+      <div class="pizza-builder--done">
+        <p>Give your pizza a name</p>
+        <input type="text" />
+        <button>Print your recipe card</button>
+      </div>
+    </section>
     <script type="module">
       import { init } from "./js/script.js";
       const res = await fetch("./data/data.json");

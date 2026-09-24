@@ -5,6 +5,35 @@
   },
   "steps": [
     {
+      "id": "size",
+      "label": "Size",
+      "description": "How hungry are we?",
+      "required": true,
+      "multiSelect": false,
+      "options": [
+        {
+          "id": "personal",
+          "label": "Personal (6\")",
+          "description": "Just for you"
+        },
+        {
+          "id": "medium",
+          "label": "Medium (10\")",
+          "description": "Good for two"
+        },
+        {
+          "id": "large",
+          "label": "Large (14\")",
+          "description": "The group order"
+        },
+        {
+          "id": "sheet-pan",
+          "label": "Sheet Pan",
+          "description": "Feed the whole crew"
+        }
+      ]
+    },
+    {
       "id": "crust",
       "label": "Crust",
       "description": "Every great pizza starts with the base.",
@@ -35,35 +64,6 @@
           "id": "stuffed",
           "label": "Stuffed Crust",
           "description": "Cheese-filled all the way to the edge"
-        }
-      ]
-    },
-    {
-      "id": "crust-seasoning",
-      "label": "Crust Seasoning",
-      "description": "Finish the edge with something special.",
-      "required": false,
-      "multiSelect": false,
-      "options": [
-        {
-          "id": "plain",
-          "label": "Plain",
-          "description": "Let the crust speak for itself"
-        },
-        {
-          "id": "garlic-butter",
-          "label": "Garlic Butter",
-          "description": "Rich and savory, brushed on before baking"
-        },
-        {
-          "id": "everything-bagel",
-          "label": "Everything Bagel",
-          "description": "Sesame, poppy, onion, garlic — the works"
-        },
-        {
-          "id": "cornmeal",
-          "label": "Cornmeal Dusted",
-          "description": "Adds a subtle crunch to the base"
         }
       ]
     },
@@ -237,22 +237,31 @@
       ]
     },
     {
-      "id": "heat",
-      "label": "Heat Level",
-      "description": "How much kick do you want?",
-      "required": true,
+      "id": "crust-seasoning",
+      "label": "Crust Seasoning",
+      "description": "Finish the edge with something special.",
+      "required": false,
       "multiSelect": false,
       "options": [
-        { "id": "mild", "label": "Mild", "description": "No heat, all flavor" },
         {
-          "id": "medium",
-          "label": "Medium",
-          "description": "A little warmth in the background"
+          "id": "plain",
+          "label": "Plain",
+          "description": "Let the crust speak for itself"
         },
         {
-          "id": "hot",
-          "label": "Hot",
-          "description": "Calabrian chilis or red pepper flakes on top"
+          "id": "garlic-butter",
+          "label": "Garlic Butter",
+          "description": "Rich and savory, brushed on before baking"
+        },
+        {
+          "id": "everything-bagel",
+          "label": "Everything Bagel",
+          "description": "Sesame, poppy, onion, garlic — the works"
+        },
+        {
+          "id": "cornmeal",
+          "label": "Cornmeal Dusted",
+          "description": "Adds a subtle crunch to the base"
         }
       ]
     },
@@ -318,35 +327,6 @@
           "id": "chili-crisp",
           "label": "Chili Crisp",
           "description": "Crunchy, oily, spicy, addictive"
-        }
-      ]
-    },
-    {
-      "id": "size",
-      "label": "Size",
-      "description": "How hungry are we?",
-      "required": true,
-      "multiSelect": false,
-      "options": [
-        {
-          "id": "personal",
-          "label": "Personal (6\")",
-          "description": "Just for you"
-        },
-        {
-          "id": "medium",
-          "label": "Medium (10\")",
-          "description": "Good for two"
-        },
-        {
-          "id": "large",
-          "label": "Large (14\")",
-          "description": "The group order"
-        },
-        {
-          "id": "sheet-pan",
-          "label": "Sheet Pan",
-          "description": "Feed the whole crew"
         }
       ]
     },
