@@ -378,9 +378,15 @@ export function init(data) {
   };
 
   const updateCompleteButton = () => {
-    const cheeseSelections = selections.get("cheese") || [];
+    const requiredSteps = ["size", "crust", "sauce", "cheese"];
 
-    completeButton.hidden = cheeseSelections.length === 0;
+    const hasRequiredIngredients = requiredSteps.every((stepId) => {
+      const stepSelections = selections.get(stepId) || [];
+
+      return stepSelections.length > 0;
+    });
+
+    completeButton.hidden = !hasRequiredIngredients;
   };
 
   completeButton.addEventListener("click", () => {
