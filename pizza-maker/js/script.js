@@ -270,6 +270,20 @@ export function init(data) {
     });
   };
 
+  const scrollActiveNavItem = (navItem) => {
+    if (!window.matchMedia("(max-width: 768px)").matches) {
+      return;
+    }
+
+    const gap =
+      parseFloat(getComputedStyle(document.documentElement).fontSize) * 0.5;
+
+    navigation.scrollTo({
+      left: navItem.offsetLeft - gap,
+      behavior: "smooth",
+    });
+  };
+
   const showStep = (stepId) => {
     const sections = builder.querySelectorAll(
       ".pizza-builder--ingredient-section",
@@ -289,7 +303,13 @@ export function init(data) {
     const navItems = navigation.querySelectorAll(".pizza-builder--nav-item");
 
     navItems.forEach((navItem) => {
-      navItem.classList.toggle("is-active", navItem.dataset.stepId === stepId);
+      const isActive = navItem.dataset.stepId === stepId;
+
+      navItem.classList.toggle("is-active", isActive);
+
+      if (isActive) {
+        scrollActiveNavItem(navItem);
+      }
     });
 
     if (stepId === "extras") {
@@ -334,10 +354,6 @@ export function init(data) {
     button.dataset.stepId = stepId;
 
     button.innerHTML = `
-      <span class="pizza-builder--nav-number">
-        ${index}
-      </span>
-
       <span class="pizza-builder--nav-label">
         ${label}
       </span>
