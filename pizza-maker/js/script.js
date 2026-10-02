@@ -2,21 +2,42 @@
 
 export function init(data) {
   const builder = document.querySelector(".pizza-builder");
+
   const navigation = builder.querySelector(".pizza-builder--navigation");
+
   const directions = builder.querySelector(".pizza-builder--game-directions");
+
   const builtPizza = builder.querySelector(".pizza-builder--built-pizza");
-  const builtPizzaList = builtPizza.querySelector("ul");
+
+  const pizzaToppings = builtPizza.querySelector(
+    ".pizza-builder--pizza-toppings",
+  );
+
   const completeButton = builder.querySelector(".pizza-builder--complete");
 
   const selections = new Map();
 
-  // Map JSON IDs to the containers to be rendered. Include limits
+  // --------------------------------
+  // Selection rules
+  // --------------------------------
+
   const selectionLimits = {
     size: 1,
     crust: 1,
     sauce: 1,
     proteins: 3,
   };
+
+  // These selections describe the pizza itself.
+  // Everything else becomes a visual topping layer.
+  const baseSteps = ["size", "crust", "sauce"];
+
+  // Steps displayed together under Extras.
+  const extraSteps = ["crust-seasoning", "fresh-finishes", "drizzle"];
+
+  // --------------------------------
+  // Step containers
+  // --------------------------------
 
   const stepContainers = {
     size: ".pizza-builder--size",
@@ -30,7 +51,6 @@ export function init(data) {
     drizzle: ".pizza-builder--drizzle",
   };
 
-  //  Map nav IDs to sections
   const sectionContainers = {
     size: ".pizza-builder--size",
     crust: ".pizza-builder--crust",
@@ -41,74 +61,122 @@ export function init(data) {
     extras: ".pizza-builder--extras",
   };
 
-  const addIngredient = (option, stepId, optionElement) => {
-    // Allow once.
-    if (optionElement.classList.contains("is-selected")) {
+  // --------------------------------
+  // Pizza visual state
+  // --------------------------------
+
+  const addPizzaVisual = (option, stepId) => {
+    // Size, crust and sauce are attributes on the pizza.
+    if (baseSteps.includes(stepId)) {
+      builtPizza.dataset[stepId] = option.id;
+
       return;
     }
+
+    // Cheese, proteins, vegetables and extras
+    // become individual visual layers.
+    const topping = document.createElement("div");
+
+    topping.classList.add("pizza-builder--pizza-topping");
+
+    topping.dataset.category = stepId;
+    topping.dataset.ingredient = option.id;
+
+    pizzaToppings.appendChild(topping);
+  };
+
+  const removePizzaVisual = (optionId, stepId) => {
+    if (baseSteps.includes(stepId)) {
+      delete builtPizza.dataset[stepId];
+
+      return;
+    }
+
+    const topping = pizzaToppings.querySelector(
+      `.pizza-builder--pizza-topping[data-category="${stepId}"][data-ingredient="${optionId}"]`,
+    );
+
+    topping?.remove();
+  };
+
+  // --------------------------------
+  // Sync UI controls
+  // --------------------------------
+
+  const updateOptionState = (optionId, stepId, isSelected) => {
+    const optionButton = builder.querySelector(
+      `.pizza-builder--option[data-option-id="${optionId}"][data-step-id="${stepId}"]`,
+    );
+
+    if (optionButton) {
+      optionButton.classList.toggle("is-selected", isSelected);
+    }
+
+    const selectOption = builder.querySelector(
+      `.pizza-builder--option-select[data-step-id="${stepId}"] option[value="${optionId}"]`,
+    );
+
+    if (selectOption) {
+      selectOption.disabled = isSelected;
+    }
+  };
+
+  // --------------------------------
+  // Add ingredient
+  // --------------------------------
+
+  const addIngredient = (option, stepId, optionElement = null) => {
     const stepSelections = selections.get(stepId) || [];
+
     const limit = selectionLimits[stepId];
+
+    // Ingredient can only be selected once.
+    if (stepSelections.includes(option.id)) {
+      return;
+    }
 
     if (limit && stepSelections.length >= limit) {
       return;
     }
 
     stepSelections.push(option.id);
+
     selections.set(stepId, stepSelections);
+
+    updateOptionState(option.id, stepId, true);
+
+    addPizzaVisual(option, stepId);
+
     updateCompleteButton();
-    optionElement.classList.add("is-selected");
 
-    const listItem = document.createElement("li");
-
-    listItem.classList.add("pizza-builder--built-ingredient");
-    listItem.dataset.optionId = option.id;
-    listItem.dataset.stepId = stepId;
-
-    const label = document.createElement("span");
-
-    label.classList.add("pizza-builder--built-ingredient-label");
-    label.textContent = option.label;
-
-    const removeButton = document.createElement("button");
-
-    removeButton.type = "button";
-    removeButton.classList.add("pizza-builder--remove-ingredient");
-    removeButton.setAttribute(
-      "aria-label",
-      `Remove ${option.label} from pizza`,
-    );
-
-    removeButton.textContent = "×";
-
-    removeButton.addEventListener("click", () => {
-      removeIngredient(option.id, stepId, listItem);
-    });
-
-    listItem.append(label, removeButton);
-
-    builtPizzaList.appendChild(listItem);
-
-    //  Auto move to the next navigation step.
+    // Automatically move to the next nav step
+    // when a limited category is complete.
     if (limit && stepSelections.length === limit) {
       goToNextStep(stepId);
     }
   };
 
-  const removeIngredient = (optionId, stepId, listItem) => {
+  // --------------------------------
+  // Remove ingredient
+  // --------------------------------
+
+  const removeIngredient = (optionId, stepId) => {
     const stepSelections = selections.get(stepId) || [];
+
     const updatedSelections = stepSelections.filter((id) => id !== optionId);
+
     selections.set(stepId, updatedSelections);
+
+    updateOptionState(optionId, stepId, false);
+
+    removePizzaVisual(optionId, stepId);
+
     updateCompleteButton();
-    const optionElement = builder.querySelector(
-      `.pizza-builder--option[data-option-id="${optionId}"][data-step-id="${stepId}"]`,
-    );
-
-    if (optionElement) {
-      optionElement.classList.remove("is-selected");
-    }
-
-    listItem.remove();
   };
+
+  // --------------------------------
+  // Drag ingredient
+  // --------------------------------
 
   const startIngredientDrag = (event, option, optionElement) => {
     if (!event.isPrimary) {
@@ -133,17 +201,19 @@ export function init(data) {
       document.body.appendChild(dragClone);
     };
 
-    const moveClone = (event) => {
+    const moveClone = (moveEvent) => {
       if (!dragClone) {
         return;
       }
 
-      dragClone.style.left = `${event.clientX}px`;
-      dragClone.style.top = `${event.clientY}px`;
+      dragClone.style.left = `${moveEvent.clientX}px`;
+
+      dragClone.style.top = `${moveEvent.clientY}px`;
     };
 
     const handlePointerMove = (moveEvent) => {
       const distanceX = moveEvent.clientX - startX;
+
       const distanceY = moveEvent.clientY - startY;
 
       const distance = Math.hypot(distanceX, distanceY);
@@ -202,35 +272,48 @@ export function init(data) {
     document.addEventListener("pointercancel", handlePointerUp);
   };
 
-  // Steps to displayed together as Extras
-  const extraSteps = ["crust-seasoning", "fresh-finishes", "drizzle"];
+  // --------------------------------
+  // Desktop option
+  // --------------------------------
 
-  // Individual ingredient options.
   const createOption = (option, step) => {
     const optionElement = document.createElement("button");
 
     optionElement.type = "button";
+
     optionElement.classList.add("pizza-builder--option");
 
     optionElement.dataset.optionId = option.id;
+
     optionElement.dataset.stepId = step.id;
 
     optionElement.setAttribute("aria-label", `${option.label}. Add to pizza`);
 
     optionElement.innerHTML = `
-    <span class="pizza-builder--option-label">
-      ${option.label}
-    </span>
+      <span class="pizza-builder--option-label">
+        ${option.label}
+      </span>
 
-    <span class="pizza-builder--option-description">
-      ${option.description}
-    </span>
-  `;
+      <span class="pizza-builder--option-description">
+        ${option.description}
+      </span>
+    `;
 
     optionElement.addEventListener("click", () => {
+      const stepSelections = selections.get(step.id) || [];
+
+      // Clicking an already-selected option
+      // removes it.
+      if (stepSelections.includes(option.id)) {
+        removeIngredient(option.id, step.id);
+
+        return;
+      }
+
       addIngredient(option, step.id, optionElement);
     });
 
+    // Dragging is desktop/fine-pointer only.
     if (window.matchMedia("(pointer: fine)").matches) {
       optionElement.addEventListener("pointerdown", (event) => {
         startIngredientDrag(event, option, optionElement);
@@ -240,26 +323,68 @@ export function init(data) {
     return optionElement;
   };
 
-  const createExtraStep = (step, container) => {
+  // --------------------------------
+  // Mobile select
+  // --------------------------------
+
+  const createOptionSelect = (step) => {
+    const select = document.createElement("select");
+
+    select.classList.add("pizza-builder--option-select");
+
+    select.dataset.stepId = step.id;
+
+    const placeholder = document.createElement("option");
+
+    placeholder.value = "";
+
+    placeholder.textContent = `Choose ${step.label}`;
+
+    select.appendChild(placeholder);
+
+    step.options?.forEach((option) => {
+      const selectOption = document.createElement("option");
+
+      selectOption.value = option.id;
+
+      selectOption.textContent = option.label;
+
+      select.appendChild(selectOption);
+    });
+
+    select.addEventListener("change", () => {
+      const option = step.options?.find((item) => item.id === select.value);
+
+      if (!option) {
+        return;
+      }
+
+      addIngredient(option, step.id);
+
+      select.value = "";
+    });
+
+    return select;
+  };
+
+  // --------------------------------
+  // Regular step
+  // --------------------------------
+
+  const createRegularStep = (step, container) => {
     container.innerHTML = `
-    <details class="pizza-builder--extra">
-      <summary class="pizza-builder--extra-title">
-        ${step.label}
-      </summary>
+      <h2>${step.label}</h2>
 
-      <div class="pizza-builder--extra-content">
-        <p class="pizza-builder--step-description">
-          ${step.description}
-        </p>
+      <p class="pizza-builder--step-description">
+        ${step.description}
+      </p>
+    `;
 
-        <div class="pizza-builder--options"></div>
-      </div>
-    </details>
-  `;
+    const select = createOptionSelect(step);
 
-    const details = container.querySelector(".pizza-builder--extra");
+    const optionsContainer = document.createElement("div");
 
-    const optionsContainer = container.querySelector(".pizza-builder--options");
+    optionsContainer.classList.add("pizza-builder--options");
 
     step.options?.forEach((option) => {
       const optionElement = createOption(option, step);
@@ -267,6 +392,51 @@ export function init(data) {
       optionsContainer.appendChild(optionElement);
     });
 
+    container.append(select, optionsContainer);
+  };
+
+  // --------------------------------
+  // Extra accordion step
+  // --------------------------------
+
+  const createExtraStep = (step, container) => {
+    container.innerHTML = `
+      <details class="pizza-builder--extra">
+
+        <summary class="pizza-builder--extra-title">
+          ${step.label}
+        </summary>
+
+        <div class="pizza-builder--extra-content">
+
+          <p class="pizza-builder--step-description">
+            ${step.description}
+          </p>
+
+        </div>
+
+      </details>
+    `;
+
+    const details = container.querySelector(".pizza-builder--extra");
+
+    const content = container.querySelector(".pizza-builder--extra-content");
+
+    const select = createOptionSelect(step);
+
+    const optionsContainer = document.createElement("div");
+
+    optionsContainer.classList.add("pizza-builder--options");
+
+    step.options?.forEach((option) => {
+      const optionElement = createOption(option, step);
+
+      optionsContainer.appendChild(optionElement);
+    });
+
+    content.append(select, optionsContainer);
+
+    // Only one Extra can be open.
     details.addEventListener("toggle", () => {
       if (!details.open) {
         return;
@@ -281,6 +451,10 @@ export function init(data) {
         });
     });
   };
+
+  // --------------------------------
+  // Create step
+  // --------------------------------
 
   const createStep = (step) => {
     const containerSelector = stepContainers[step.id];
@@ -297,73 +471,31 @@ export function init(data) {
 
     if (extraSteps.includes(step.id)) {
       createExtraStep(step, container);
+
       return;
     }
 
-    container.innerHTML = `
-    <h2>${step.label}</h2>
-
-    <p class="pizza-builder--step-description">
-      ${step.description}
-    </p>
-
-    <select
-      class="pizza-builder--option-select"
-      aria-label="Choose ${step.label}"
-    >
-      <option value="">Choose ${step.label}</option>
-
-      ${step.options
-        ?.map(
-          (option) => `
-            <option value="${option.id}">
-              ${option.label}
-            </option>
-          `,
-        )
-        .join("")}
-    </select>
-
-    <div class="pizza-builder--options"></div>
-  `;
-
-    const select = container.querySelector(".pizza-builder--option-select");
-
-    const optionsContainer = container.querySelector(".pizza-builder--options");
-
-    select.addEventListener("change", () => {
-      const option = step.options.find((option) => option.id === select.value);
-
-      if (!option) {
-        return;
-      }
-
-      const optionElement = container.querySelector(
-        `.pizza-builder--option[data-option-id="${option.id}"]`,
-      );
-
-      addIngredient(option, step.id, optionElement);
-
-      select.value = "";
-    });
-
-    step.options?.forEach((option) => {
-      const optionElement = createOption(option, step);
-
-      optionsContainer.appendChild(optionElement);
-    });
+    createRegularStep(step, container);
   };
 
+  // --------------------------------
+  // Navigation
+  // --------------------------------
+
   const scrollActiveNavItem = (navItem) => {
-    if (!window.matchMedia("(max-width: 768px)").matches) {
+    if (!window.matchMedia("(max-width: 767px)").matches) {
       return;
     }
 
-    const gap =
-      parseFloat(getComputedStyle(document.documentElement).fontSize) * 0.5;
+    const rootFontSize = parseFloat(
+      getComputedStyle(document.documentElement).fontSize,
+    );
+
+    const gap = rootFontSize * 0.5;
 
     navigation.scrollTo({
       left: navItem.offsetLeft - gap,
+
       behavior: "smooth",
     });
   };
@@ -378,6 +510,7 @@ export function init(data) {
     });
 
     const targetSelector = sectionContainers[stepId];
+
     const targetSection = builder.querySelector(targetSelector);
 
     if (targetSection) {
@@ -425,7 +558,7 @@ export function init(data) {
     }
   };
 
-  const createNavButton = (stepId, label, index) => {
+  const createNavButton = (stepId, label) => {
     const button = document.createElement("button");
 
     button.type = "button";
@@ -451,7 +584,6 @@ export function init(data) {
   };
 
   const createNavigation = () => {
-    let navIndex = 0;
     let extrasCreated = false;
 
     data.steps.forEach((step) => {
@@ -461,9 +593,7 @@ export function init(data) {
 
       if (extraSteps.includes(step.id)) {
         if (!extrasCreated) {
-          navIndex++;
-
-          createNavButton("extras", "Extras", navIndex);
+          createNavButton("extras", "Extras");
 
           extrasCreated = true;
         }
@@ -471,11 +601,13 @@ export function init(data) {
         return;
       }
 
-      navIndex++;
-
-      createNavButton(step.id, step.label, navIndex);
+      createNavButton(step.id, step.label);
     });
   };
+
+  // --------------------------------
+  // Complete pizza
+  // --------------------------------
 
   const updateCompleteButton = () => {
     const requiredSteps = ["size", "crust", "sauce", "cheese"];
@@ -511,13 +643,20 @@ export function init(data) {
     builder.querySelector(".pizza-builder--done").classList.add("is-active");
   });
 
+  // --------------------------------
+  // Initialize
+  // --------------------------------
+
   const initPizzaBuilder = () => {
     data.steps.forEach((step) => {
       createStep(step);
     });
+
     createNavigation();
 
-    const firstStep = data.steps[0];
+    updateCompleteButton();
+
+    const firstStep = data.steps.find((step) => step.id !== "name");
 
     if (firstStep) {
       showStep(firstStep.id);

@@ -4,59 +4,82 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pizza</title>
+
     <link rel="stylesheet" href="styles/style.min.css" />
   </head>
+
   <body>
     <section class="pizza-builder">
-      <nav class="pizza-builder--navigation"></nav>
+      <nav
+        class="pizza-builder--navigation"
+        aria-label="Pizza building steps"
+      ></nav>
 
       <div class="pizza-builder--play-surface">
         <div
           class="pizza-builder--ingredient-section pizza-builder--size"
         ></div>
+
         <div
           class="pizza-builder--ingredient-section pizza-builder--crust"
         ></div>
+
         <div
           class="pizza-builder--ingredient-section pizza-builder--sauce"
         ></div>
+
         <div
           class="pizza-builder--ingredient-section pizza-builder--cheese"
         ></div>
+
         <div
           class="pizza-builder--ingredient-section pizza-builder--proteins"
         ></div>
+
         <div
           class="pizza-builder--ingredient-section pizza-builder--vegetables"
         ></div>
 
         <div class="pizza-builder--ingredient-section pizza-builder--extras">
           <div class="pizza-builder--crust-seasons"></div>
+
           <div class="pizza-builder--fresh-finishes"></div>
+
           <div class="pizza-builder--drizzle"></div>
         </div>
       </div>
+
       <div class="pizza-builder--table">
-        <div class="pizza-builder--built-pizza">
-          <ul></ul>
+        <div class="pizza-builder--pan">
+          <div class="pizza-builder--built-pizza">
+            <div class="pizza-builder--pizza-toppings" aria-hidden="true"></div>
+          </div>
         </div>
+
         <button type="button" class="pizza-builder--complete" hidden>
           Complete Pizza
         </button>
       </div>
+
       <div class="pizza-builder--done">
         <div class="pizza-builder--game-directions">
           <!-- Populated from the current step -->
         </div>
+
         <p>Give your pizza a name</p>
-        <input type="text" />
-        <button>Print your recipe card</button>
+
+        <input type="text" aria-label="Pizza name" />
+
+        <button type="button">Print your recipe card</button>
       </div>
     </section>
+
     <script type="module">
       import { init } from "./js/script.js";
+
       const res = await fetch("./data/data.json");
       const data = await res.json();
+
       init(data);
     </script>
   </body>

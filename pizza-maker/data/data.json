@@ -12,7 +12,7 @@
       "multiSelect": false,
       "options": [
         {
-          "id": "personal",
+          "id": "small",
           "label": "Personal (6\")",
           "description": "Just for you"
         },
