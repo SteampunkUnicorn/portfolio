@@ -231,11 +231,55 @@ export function init(data) {
       addIngredient(option, step.id, optionElement);
     });
 
-    optionElement.addEventListener("pointerdown", (event) => {
-      startIngredientDrag(event, option, optionElement);
-    });
+    if (window.matchMedia("(pointer: fine)").matches) {
+      optionElement.addEventListener("pointerdown", (event) => {
+        startIngredientDrag(event, option, optionElement);
+      });
+    }
 
     return optionElement;
+  };
+
+  const createExtraStep = (step, container) => {
+    container.innerHTML = `
+    <details class="pizza-builder--extra">
+      <summary class="pizza-builder--extra-title">
+        ${step.label}
+      </summary>
+
+      <div class="pizza-builder--extra-content">
+        <p class="pizza-builder--step-description">
+          ${step.description}
+        </p>
+
+        <div class="pizza-builder--options"></div>
+      </div>
+    </details>
+  `;
+
+    const details = container.querySelector(".pizza-builder--extra");
+
+    const optionsContainer = container.querySelector(".pizza-builder--options");
+
+    step.options?.forEach((option) => {
+      const optionElement = createOption(option, step);
+
+      optionsContainer.appendChild(optionElement);
+    });
+
+    details.addEventListener("toggle", () => {
+      if (!details.open) {
+        return;
+      }
+
+      builder
+        .querySelectorAll(".pizza-builder--extra[open]")
+        .forEach((otherDetails) => {
+          if (otherDetails !== details) {
+            otherDetails.removeAttribute("open");
+          }
+        });
+    });
   };
 
   const createStep = (step) => {
@@ -251,17 +295,57 @@ export function init(data) {
       return;
     }
 
+    if (extraSteps.includes(step.id)) {
+      createExtraStep(step, container);
+      return;
+    }
+
     container.innerHTML = `
-      <h2>${step.label}</h2>
+    <h2>${step.label}</h2>
 
-      <p class="pizza-builder--step-description">
-        ${step.description}
-      </p>
+    <p class="pizza-builder--step-description">
+      ${step.description}
+    </p>
 
-      <div class="pizza-builder--options"></div>
-    `;
+    <select
+      class="pizza-builder--option-select"
+      aria-label="Choose ${step.label}"
+    >
+      <option value="">Choose ${step.label}</option>
+
+      ${step.options
+        ?.map(
+          (option) => `
+            <option value="${option.id}">
+              ${option.label}
+            </option>
+          `,
+        )
+        .join("")}
+    </select>
+
+    <div class="pizza-builder--options"></div>
+  `;
+
+    const select = container.querySelector(".pizza-builder--option-select");
 
     const optionsContainer = container.querySelector(".pizza-builder--options");
+
+    select.addEventListener("change", () => {
+      const option = step.options.find((option) => option.id === select.value);
+
+      if (!option) {
+        return;
+      }
+
+      const optionElement = container.querySelector(
+        `.pizza-builder--option[data-option-id="${option.id}"]`,
+      );
+
+      addIngredient(option, step.id, optionElement);
+
+      select.value = "";
+    });
 
     step.options?.forEach((option) => {
       const optionElement = createOption(option, step);

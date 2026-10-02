@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Lilita+One&family=Nunito+Sans:wght@400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@100;600;700&family=Lilita+One&family=Nunito+Sans:wght@400;600&display=swap");
 
 :root {
   // fonts
@@ -35,6 +35,12 @@ h3 {
   font-weight: 400;
 }
 
+h2 {
+  font-size: 2.8rem;
+  letter-spacing: 2px;
+  margin: 0 0 1rem;
+}
+
 body {
   font-family: var(--font-body);
   font-weight: 400;
@@ -42,8 +48,46 @@ body {
   color: var(--color-text-inverse);
 }
 
+p {
+  margin-top: 0;
+}
+
 .pizza-builder {
   width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+
+  // Mobile: everything stacked
+  &--navigation,
+  &--play-surface,
+  &--table,
+  &--done {
+    grid-column: 1;
+  }
+
+  @media (min-width: 768px) {
+    // Desktop: 30 / 70 split
+    grid-template-columns: 3fr 7fr;
+    align-items: start;
+
+    &--navigation,
+    &--done {
+      grid-column: 1 / -1;
+    }
+
+    &--play-surface {
+      grid-column: 1;
+    }
+
+    &--table {
+      grid-column: 2;
+      width: 100%;
+      aspect-ratio: 1;
+    }
+  }
 
   &--game-directions {
     margin-bottom: 1rem;
@@ -51,7 +95,8 @@ body {
 
   &--navigation {
     display: flex;
-    padding: 0.5rem;
+    justify-content: center;
+    padding: 0.5rem 0 2rem;
     gap: 0.5rem;
 
     @media (max-width: 768px) {
@@ -71,6 +116,7 @@ body {
   &--nav-item {
     cursor: pointer;
     font-size: 1.5rem;
+    font-weight: 600;
     padding: 0.4rem 0.8rem;
     color: var(--color-text);
     position: relative;
@@ -168,14 +214,46 @@ body {
     }
   }
 
+  &--option-select {
+    display: block;
+    width: 100%;
+  }
+
   &--options {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    &--option-select {
+      display: none;
+    }
+
+    &--options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
   }
 
   &--option {
     cursor: grab;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    background: #f5f0e4;
+    border: 1px solid #cbc1aa;
+    font-size: 0.8rem;
+    font-weight: 100;
+    border-top-left-radius: 250px 15px;
+    border-bottom-left-radius: 20px 115px;
+    border-bottom-right-radius: 105px 15px;
+    box-shadow:
+      inset 0 2px 1px hsla(0, 0%, 100%, 0.45),
+      inset 0 -3px 2px rgba(0, 0, 0, 0.2),
+      0 3px 0 rgba(0, 0, 0, 0.3),
+      0 4px 5px rgba(0, 0, 0, 0.2);
+    padding: 2rem 1rem;
+    max-width: 130px;
 
     &:active {
       cursor: grabbing;
@@ -191,14 +269,91 @@ body {
     }
   }
 
-  &--extras {
-    width: 100%;
+  &--option-label {
+    display: block;
+    border-bottom: 1px dashed rgba(31, 41, 36, 0.35);
+    padding-bottom: 0.25rem;
+    margin-bottom: 0.25rem;
+    font-size: 1rem;
+    font-weight: 600;
   }
 
-  &--crust-seasons,
-  &--fresh-finishes,
-  &--drizzle {
-    margin-bottom: 2rem;
+  &--extras {
+    .pizza-builder--extra-title {
+      font-size: 2rem;
+
+      transition:
+        font-size 250ms ease,
+        padding 250ms ease;
+    }
+
+    // When any extra is open...
+    &:has(.pizza-builder--extra[open]) {
+      // Shrink all titles
+      .pizza-builder--extra-title {
+        font-size: 1rem;
+      }
+
+      // Except the title belonging to the open section
+      .pizza-builder--extra[open] {
+        .pizza-builder--extra-title {
+          font-size: 2rem;
+        }
+      }
+    }
+  }
+
+  &--extra {
+    border-bottom: 1px solid rgba(31, 41, 36, 0.25);
+
+    &-title {
+      cursor: pointer;
+      list-style: none;
+
+      font-family: var(--font-heading);
+      font-size: 1rem;
+
+      padding: 0.5rem 0;
+
+      transition:
+        font-size 250ms ease,
+        padding 250ms ease;
+
+      // Remove browser's default triangle
+      &::-webkit-details-marker {
+        display: none;
+      }
+    }
+
+    &[open] {
+      .pizza-builder--extra-title {
+        font-size: 2rem;
+        padding: 1rem 0;
+      }
+    }
+
+    &-content {
+      padding-bottom: 1rem;
+    }
+  }
+
+  &--extra-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &::after {
+      content: "+";
+      font-family: var(--font-body);
+      font-size: 1.5rem;
+      font-weight: 400;
+    }
+  }
+
+  &--extra[open] {
+    .pizza-builder--extra-title::after {
+      content: "−";
+    }
   }
 
   &--done {
@@ -242,10 +397,6 @@ body {
       300px 300px,
       36px 36px,
       36px 36px;
-
-    @media (min-width: 768px) {
-      max-width: 45%;
-    }
   }
 
   &--built-pizza {
