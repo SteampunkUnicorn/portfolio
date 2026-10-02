@@ -560,12 +560,7 @@ p {
     align-items: center;
     justify-content: center;
 
-    aspect-ratio: 1;
-
     border-radius: 50%;
-
-    // Default drop target before a size is chosen.
-    width: 75%;
 
     transition:
       width 300ms ease,
@@ -592,17 +587,17 @@ p {
         0 0 0 4px rgba(255, 255, 255, 0.8),
         0 0 15px rgba(0, 0, 0, 0.35);
     }
-  }
 
-  // These are intentionally just hooks for now.
-  // Later you can attach actual crust/sauce images to them.
+    width: 96%;
+    aspect-ratio: 1;
 
-  &--built-pizza[data-crust] {
-    // crust visual goes here
-  }
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
 
-  &--built-pizza[data-sauce] {
-    // sauce visual goes here
+    &[data-crust="hand-tossed"] {
+      background-image: url("../images/handtossed.png");
+    }
   }
 
   // --------------------------------
@@ -624,23 +619,46 @@ p {
     position: absolute;
     inset: 0;
 
-    border-radius: 50%;
+    width: 100%;
+    height: 100%;
 
     background-position: center;
-    background-size: contain;
     background-repeat: no-repeat;
+    background-size: contain;
 
     pointer-events: none;
 
-    // Examples for later:
-    //
-    // &[data-ingredient="pepperoni"] {
-    //   background-image: url("../images/pepperoni.png");
-    // }
-    //
-    // &[data-ingredient="mozzarella"] {
-    //   background-image: url("../images/mozzarella.png");
-    // }
+    &[data-category="sauce"] {
+      z-index: 10;
+    }
+
+    &[data-category="cheese"] {
+      z-index: 20;
+    }
+
+    &[data-ingredient="mozzarella"] {
+      background-image: url("../images/mozzarella.png");
+    }
+
+    &[data-category="proteins"] {
+      z-index: 30;
+    }
+
+    &[data-category="vegetables"] {
+      z-index: 40;
+    }
+
+    &[data-category="crust-seasoning"] {
+      z-index: 50;
+    }
+
+    &[data-category="fresh-finishes"] {
+      z-index: 60;
+    }
+
+    &[data-category="drizzle"] {
+      z-index: 70;
+    }
   }
 
   // --------------------------------
