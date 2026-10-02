@@ -8,7 +8,7 @@ export function init(data) {
   const directions = builder.querySelector(".pizza-builder--game-directions");
 
   const builtPizza = builder.querySelector(".pizza-builder--built-pizza");
-
+  const pan = builder.querySelector(".pizza-builder--pan");
   const pizzaToppings = builtPizza.querySelector(
     ".pizza-builder--pizza-toppings",
   );
@@ -66,15 +66,16 @@ export function init(data) {
   // --------------------------------
 
   const addPizzaVisual = (option, stepId) => {
-    // Size, crust and sauce are attributes on the pizza.
-    if (baseSteps.includes(stepId)) {
-      builtPizza.dataset[stepId] = option.id;
-
+    if (stepId === "size") {
+      pan.dataset.size = option.id;
       return;
     }
 
-    // Cheese, proteins, vegetables and extras
-    // become individual visual layers.
+    if (stepId === "crust" || stepId === "sauce") {
+      builtPizza.dataset[stepId] = option.id;
+      return;
+    }
+
     const topping = document.createElement("div");
 
     topping.classList.add("pizza-builder--pizza-topping");

@@ -278,32 +278,24 @@ p {
   // --------------------------------
 
   &--option {
+    position: relative;
     cursor: grab;
-
     display: flex;
     flex-direction: column;
-
     text-align: left;
-
     background: #f5f0e4;
-
     border: 1px solid #cbc1aa;
-
     font-size: 0.8rem;
     font-weight: 100;
-
     border-top-left-radius: 250px 15px;
     border-bottom-left-radius: 20px 115px;
     border-bottom-right-radius: 105px 15px;
-
     box-shadow:
       inset 0 2px 1px hsla(0, 0%, 100%, 0.45),
       inset 0 -3px 2px rgba(0, 0, 0, 0.2),
       0 3px 0 rgba(0, 0, 0, 0.3),
       0 4px 5px rgba(0, 0, 0, 0.2);
-
     padding: 2rem 1rem;
-
     max-width: 130px;
 
     &:active {
@@ -311,7 +303,51 @@ p {
     }
 
     &.is-selected {
-      opacity: 0.4;
+      // Faded overlay
+      &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background-color: rgba(0, 0, 0, 0.6);
+
+        // Match the card's irregular corners
+        border-top-left-radius: 250px 15px;
+        border-bottom-left-radius: 20px 115px;
+        border-bottom-right-radius: 105px 15px;
+        pointer-events: none;
+      }
+
+      // Fully opaque remove X
+      &::after {
+        content: "remove";
+        position: absolute;
+        top: -0.6rem;
+        right: -1.4rem;
+        z-index: 2;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        background-color: #f5f0e4;
+        color: #1f2924;
+
+        border-top-left-radius: 250px 15px;
+        border-bottom-left-radius: 20px 115px;
+        border-bottom-right-radius: 105px 15px;
+
+        font-size: 1rem;
+        font-weight: 700;
+        line-height: 1;
+        text-transform: none;
+        transform: rotate(-30deg);
+
+        padding: 0.2rem;
+
+        opacity: 1;
+        pointer-events: none;
+      }
     }
 
     &:focus-visible {
@@ -466,6 +502,7 @@ p {
 
     width: 75%;
     aspect-ratio: 1;
+    transition: width 300ms ease;
 
     border-radius: 50%;
     border: 6px solid #777;
@@ -497,6 +534,18 @@ p {
         0 1px 1px rgba(255, 255, 255, 0.7);
 
       pointer-events: none;
+    }
+
+    &[data-size="small"] {
+      width: 60%;
+    }
+
+    &[data-size="medium"] {
+      width: 75%;
+    }
+
+    &[data-size="large"] {
+      width: 90%;
     }
   }
 

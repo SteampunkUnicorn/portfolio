@@ -25,11 +25,6 @@
           "id": "large",
           "label": "Large (14\")",
           "description": "The group order"
-        },
-        {
-          "id": "sheet-pan",
-          "label": "Sheet Pan",
-          "description": "Feed the whole crew"
         }
       ]
     },
