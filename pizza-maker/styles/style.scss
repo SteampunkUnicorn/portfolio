@@ -369,81 +369,6 @@ p {
   }
 
   // --------------------------------
-  // Extras accordion
-  // --------------------------------
-
-  &--extras {
-    .pizza-builder--extra-title {
-      font-size: 2rem;
-
-      transition:
-        font-size 250ms ease,
-        padding 250ms ease;
-    }
-
-    // If one extra is open, shrink the closed titles.
-    &:has(.pizza-builder--extra[open]) {
-      .pizza-builder--extra-title {
-        font-size: 1rem;
-      }
-
-      .pizza-builder--extra[open] {
-        .pizza-builder--extra-title {
-          font-size: 2rem;
-        }
-      }
-    }
-  }
-
-  &--extra {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
-
-    &-title {
-      cursor: pointer;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      list-style: none;
-
-      font-family: var(--font-heading);
-
-      padding: 0.5rem 0;
-
-      transition:
-        font-size 250ms ease,
-        padding 250ms ease;
-
-      &::-webkit-details-marker {
-        display: none;
-      }
-
-      &::after {
-        content: "+";
-
-        font-family: var(--font-body);
-        font-size: 1.5rem;
-        font-weight: 400;
-      }
-    }
-
-    &[open] {
-      .pizza-builder--extra-title {
-        padding: 1rem 0;
-
-        &::after {
-          content: "−";
-        }
-      }
-    }
-
-    &-content {
-      padding-bottom: 1rem;
-    }
-  }
-
-  // --------------------------------
   // Table
   // --------------------------------
 
@@ -553,34 +478,28 @@ p {
   // Pizza
   // --------------------------------
 
+  // --------------------------------
+  // Pizza
+  // --------------------------------
+
   &--built-pizza {
     position: relative;
+    z-index: 1;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
+    width: 96%;
+    aspect-ratio: 1;
     border-radius: 50%;
 
-    transition:
-      width 300ms ease,
-      box-shadow 150ms ease;
+    // Crust image
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
 
-    // Temporary visual background.
-    // Replace this with your crust images later.
-    background: transparent;
-
-    &[data-size="small"] {
-      width: 60%;
-    }
-
-    &[data-size="medium"] {
-      width: 75%;
-    }
-
-    &[data-size="large"] {
-      width: 90%;
-    }
+    transition: box-shadow 150ms ease;
 
     &.is-drag-over {
       box-shadow:
@@ -588,15 +507,25 @@ p {
         0 0 15px rgba(0, 0, 0, 0.35);
     }
 
-    width: 96%;
-    aspect-ratio: 1;
+    // -----------------------------
+    // Crusts
+    // -----------------------------
 
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
+    &[data-crust="thin"] {
+      background-image: url("../images/thin-crust.png");
+    }
 
-    &[data-crust="hand-tossed"] {
-      background-image: url("../images/handtossed.png");
+    &[data-crust="hand-tossed"],
+    &[data-crust="stuffed"] {
+      background-image: url("../images/hand-tossed.png");
+    }
+
+    &[data-crust="deep-dish"] {
+      background-image: url("../images/deep-dish.png");
+    }
+
+    &[data-crust="flatbread"] {
+      background-image: url("../images/flat-bread.png");
     }
   }
 
@@ -607,9 +536,9 @@ p {
   &--pizza-toppings {
     position: absolute;
     inset: 0;
+    z-index: 1;
 
     overflow: hidden;
-
     border-radius: 50%;
 
     pointer-events: none;
@@ -628,16 +557,16 @@ p {
 
     pointer-events: none;
 
+    // -----------------------------
+    // Layer order
+    // -----------------------------
+
     &[data-category="sauce"] {
       z-index: 10;
     }
 
     &[data-category="cheese"] {
       z-index: 20;
-    }
-
-    &[data-ingredient="mozzarella"] {
-      background-image: url("../images/mozzarella.png");
     }
 
     &[data-category="proteins"] {
@@ -648,16 +577,123 @@ p {
       z-index: 40;
     }
 
-    &[data-category="crust-seasoning"] {
-      z-index: 50;
+    // -----------------------------
+    // Sauces
+    // -----------------------------
+
+    &[data-ingredient="tomato"] {
+      background-image: url("../images/classic-tomato.png");
     }
 
-    &[data-category="fresh-finishes"] {
-      z-index: 60;
+    &[data-ingredient="white"] {
+      background-image: url("../images/white-alfredo.png");
     }
 
-    &[data-category="drizzle"] {
-      z-index: 70;
+    &[data-ingredient="pesto"] {
+      background-image: url("../images/pesto.png");
+    }
+
+    &[data-ingredient="olive-oil"] {
+      background-image: url("../images/oil-garlic.png");
+    }
+
+    &[data-ingredient="bbq"] {
+      background-image: url("../images/bbq-sauce.png");
+    }
+
+    // "no-sauce" intentionally has no background image.
+
+    // -----------------------------
+    // Cheese
+    // -----------------------------
+
+    &[data-ingredient="mozzarella"],
+    &[data-ingredient="extra-cheese"] {
+      background-image: url("../images/mozzarella.png");
+    }
+
+    &[data-ingredient="provolone"] {
+      background-image: url("../images/provolone.png");
+    }
+
+    &[data-ingredient="ricotta"] {
+      background-image: url("../images/ricotta.png");
+    }
+
+    &[data-ingredient="parmesan"] {
+      background-image: url("../images/parmesan.png");
+    }
+
+    &[data-ingredient="goat-cheese"] {
+      background-image: url("../images/goat-cheese.png");
+    }
+
+    &[data-ingredient="dairy-free"] {
+      background-image: url("../images/dairy-free.png");
+    }
+
+    // -----------------------------
+    // Proteins
+    // -----------------------------
+
+    &[data-ingredient="pepperoni"] {
+      background-image: url("../images/pepperoni.png");
+    }
+
+    &[data-ingredient="sausage"] {
+      background-image: url("../images/italian-sausage.png");
+    }
+
+    &[data-ingredient="chicken"] {
+      background-image: url("../images/chicken.png");
+    }
+
+    &[data-ingredient="bacon"] {
+      background-image: url("../images/bacon.png");
+    }
+
+    &[data-ingredient="prosciutto"] {
+      background-image: url("../images/prosciutto.png");
+    }
+
+    &[data-ingredient="anchovies"] {
+      background-image: url("../images/anchovies.png");
+    }
+
+    // -----------------------------
+    // Vegetables
+    // -----------------------------
+
+    &[data-ingredient="bell-peppers"] {
+      background-image: url("../images/bell-peppers.png");
+    }
+
+    &[data-ingredient="mushrooms"] {
+      background-image: url("../images/mushrooms.png");
+    }
+
+    &[data-ingredient="red-onion"] {
+      background-image: url("../images/red-onions.png");
+    }
+
+    &[data-ingredient="black-olives"] {
+      background-image: url("../images/olives.png");
+    }
+
+    &[data-ingredient="spinach"] {
+      background-image: url("../images/spinach.png");
+    }
+
+    &[data-ingredient="artichoke"] {
+      background-image: url("../images/artichoke-hearts.png");
+    }
+
+    &[data-ingredient="jalapeno"] {
+      background-image: url("../images/jalapenos.png");
+    }
+
+    &[data-ingredient="sun-dried-tomato"] {
+      background-image: url("../images/sun-dried-tomatoes.png");
     }
   }
 
