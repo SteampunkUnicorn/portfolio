@@ -14,7 +14,34 @@
         class="pizza-builder--navigation"
         aria-label="Pizza building steps"
       ></nav>
+      <section class="pizza-builder--done">
+        <div class="pizza-builder--done_label">
+          <form class="pizza-builder--name-form">
+            <label for="pizza-name">Name your pizza</label>
 
+            <div class="pizza-builder--name-controls">
+              <input
+                type="text"
+                id="pizza-name"
+                class="pizza-builder--name-input"
+                placeholder="The Midnight Margherita"
+                autocomplete="off"
+                required
+              />
+
+              <button type="submit" class="pizza-builder--name-submit">
+                Name It
+              </button>
+            </div>
+          </form>
+
+          <span class="pizza-builder--pizza-name" hidden></span>
+        </div>
+
+        <div class="pizza-builder--summary">
+          <ul class="pizza-builder--ingredient-list"></ul>
+        </div>
+      </section>
       <div class="pizza-builder--play-surface">
         <div
           class="pizza-builder--ingredient-section pizza-builder--size"
@@ -51,18 +78,6 @@
         <button type="button" class="pizza-builder--complete" hidden>
           Complete Pizza
         </button>
-      </div>
-
-      <div class="pizza-builder--done">
-        <div class="pizza-builder--game-directions">
-          <!-- Populated from the current step -->
-        </div>
-
-        <p>Give your pizza a name</p>
-
-        <input type="text" aria-label="Pizza name" />
-
-        <button type="button">Print your recipe card</button>
       </div>
     </section>
 

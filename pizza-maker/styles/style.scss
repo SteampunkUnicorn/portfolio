@@ -225,6 +225,10 @@ p {
 
   &--play-surface {
     width: 100%;
+
+    .pizza-builder:has(.pizza-builder--done.is-active) & {
+      display: none;
+    }
   }
 
   &--ingredient-section {
@@ -739,7 +743,150 @@ p {
     display: none;
 
     &.is-active {
-      display: block;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      grid-column: 1;
     }
+  }
+
+  &--done_label {
+    position: relative;
+
+    min-height: 5rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  &--name-form {
+    opacity: 1;
+
+    transition: opacity 600ms ease;
+
+    &.is-complete {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    &[hidden] {
+      display: none;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+  }
+
+  &--pizza-name {
+    position: absolute;
+    z-index: 2;
+
+    // JS supplies left/top to match the input text.
+    margin: 0;
+
+    // Start by matching the input typography.
+    // font-family: var(--font-body);
+    // font-size: 1rem;
+    // font-weight: 400;
+    // line-height: 1;
+
+    white-space: nowrap;
+    pointer-events: none;
+
+    opacity: 0;
+    transform: translateY(0);
+
+    transition:
+      opacity 150ms ease,
+      font-size 600ms cubic-bezier(0.2, 0.8, 0.2, 1),
+      transform 600ms cubic-bezier(0.2, 0.8, 0.2, 1);
+
+    &[hidden] {
+      display: none;
+    }
+
+    &.is-visible {
+      opacity: 1;
+      //font-size: 3rem;
+
+      // Move upward while growing out of the input.
+      //transform: translateY(-1.5rem);
+    }
+
+    &.is-finished {
+      font-family: var(--font-heading);
+    }
+  }
+
+  &--summary {
+    margin-bottom: 2rem;
+  }
+
+  &--ingredient-list {
+    margin: 0 0 2rem;
+    padding-left: 1.25rem;
+  }
+
+  &--ingredient-list-item {
+    margin-bottom: 0.35rem;
+  }
+
+  &--name-form {
+    opacity: 1;
+    transform: translateY(0);
+
+    transition:
+      opacity 350ms ease,
+      transform 350ms ease;
+
+    &.is-complete {
+      opacity: 0;
+      transform: translateY(-0.5rem);
+
+      pointer-events: none;
+    }
+
+    &[hidden] {
+      display: none;
+    }
+
+    label {
+      display: block;
+
+      margin-bottom: 0.5rem;
+
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+  }
+
+  &--name-controls {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  &--name-input {
+    min-width: 0;
+    flex: 1;
+
+    padding: 0.75rem;
+
+    font-family: var(--font-body);
+    font-size: 1rem;
+
+    border: 1px solid #cbc1aa;
+    border-radius: 0.35rem;
+  }
+
+  &--name-submit {
+    cursor: pointer;
+
+    padding: 0.75rem 1rem;
   }
 }

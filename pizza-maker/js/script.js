@@ -50,6 +50,18 @@ export function init(data) {
     vegetables: ".pizza-builder--vegetables",
   };
 
+  const doneSection = builder.querySelector(".pizza-builder--done");
+
+  const ingredientList = builder.querySelector(
+    ".pizza-builder--ingredient-list",
+  );
+
+  const nameForm = builder.querySelector(".pizza-builder--name-form");
+
+  const nameInput = builder.querySelector(".pizza-builder--name-input");
+
+  const pizzaName = builder.querySelector(".pizza-builder--pizza-name");
+
   // --------------------------------
   // Pizza visual state
   // --------------------------------
@@ -536,6 +548,34 @@ export function init(data) {
     });
   };
 
+  const createIngredientSummary = () => {
+    ingredientList.innerHTML = "";
+
+    data.steps.forEach((step) => {
+      if (step.id === "size" || step.id === "name") {
+        return;
+      }
+
+      const selectedIds = selections.get(step.id) || [];
+
+      selectedIds.forEach((optionId) => {
+        const option = step.options?.find((item) => item.id === optionId);
+
+        if (!option) {
+          return;
+        }
+
+        const item = document.createElement("li");
+
+        item.classList.add("pizza-builder--ingredient-list-item");
+
+        item.textContent = option.label;
+
+        ingredientList.appendChild(item);
+      });
+    });
+  };
+
   // --------------------------------
   // Complete pizza
   // --------------------------------
@@ -569,9 +609,76 @@ export function init(data) {
 
     completeButton.hidden = true;
 
-    directions.textContent = "Every legend needs a name.";
+    createIngredientSummary();
 
-    builder.querySelector(".pizza-builder--done").classList.add("is-active");
+    doneSection.classList.add("is-active");
+
+    nameInput.focus();
+  });
+
+  nameForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const name = nameInput.value.trim();
+
+    if (!name) {
+      nameInput.focus();
+      return;
+    }
+
+    pizzaName.textContent = name;
+
+    // Get positions before changing anything.
+    const inputRect = nameInput.getBoundingClientRect();
+    const labelRect = doneSection
+      .querySelector(".pizza-builder--done_label")
+      .getBoundingClientRect();
+
+    // Position the title exactly where the input text begins.
+    pizzaName.style.left = `${
+      inputRect.left -
+      labelRect.left +
+      parseFloat(getComputedStyle(nameInput).paddingLeft)
+    }px`;
+
+    pizzaName.style.top = `${
+      inputRect.top -
+      labelRect.top +
+      parseFloat(getComputedStyle(nameInput).paddingTop)
+    }px`;
+
+    // Make it available for animation.
+    pizzaName.hidden = false;
+
+    // Force the browser to establish the starting state.
+    requestAnimationFrame(() => {
+      nameForm.classList.add("is-complete");
+      pizzaName.classList.add("is-visible");
+
+      pizzaName.addEventListener(
+        "transitionend",
+        (event) => {
+          if (event.propertyName !== "font-size") {
+            return;
+          }
+
+          pizzaName.classList.add("is-finished");
+        },
+        { once: true },
+      );
+    });
+
+    nameForm.addEventListener(
+      "transitionend",
+      (event) => {
+        if (event.propertyName !== "opacity") {
+          return;
+        }
+
+        nameForm.hidden = true;
+      },
+      { once: true },
+    );
   });
 
   // --------------------------------
