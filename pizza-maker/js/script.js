@@ -62,6 +62,18 @@ export function init(data) {
 
   const pizzaName = builder.querySelector(".pizza-builder--pizza-name");
 
+  const printButton = builder.querySelector(".pizza-builder--print");
+
+  const recipeCard = builder.querySelector(".pizza-builder--recipe-card");
+
+  const recipeName = builder.querySelector(".pizza-builder--recipe-name");
+
+  const recipeIngredients = builder.querySelector(
+    ".pizza-builder--recipe-ingredients",
+  );
+
+  const recipePizza = builder.querySelector(".pizza-builder--recipe-pizza");
+
   // --------------------------------
   // Pizza visual state
   // --------------------------------
@@ -486,10 +498,6 @@ export function init(data) {
     });
 
     const currentStep = data.steps.find((step) => step.id === stepId);
-
-    if (currentStep) {
-      directions.textContent = currentStep.description;
-    }
   };
 
   const goToNextStep = (currentStepId) => {
@@ -658,11 +666,8 @@ export function init(data) {
       pizzaName.addEventListener(
         "transitionend",
         (event) => {
-          if (event.propertyName !== "font-size") {
-            return;
-          }
-
           pizzaName.classList.add("is-finished");
+          printButton.hidden = false;
         },
         { once: true },
       );
