@@ -62,8 +62,6 @@ export function init(data) {
 
   const pizzaName = builder.querySelector(".pizza-builder--pizza-name");
 
-  const printButton = builder.querySelector(".pizza-builder--print");
-
   const recipeCard = builder.querySelector(".pizza-builder--recipe-card");
 
   const recipeName = builder.querySelector(".pizza-builder--recipe-name");
@@ -662,15 +660,6 @@ export function init(data) {
     requestAnimationFrame(() => {
       nameForm.classList.add("is-complete");
       pizzaName.classList.add("is-visible");
-
-      pizzaName.addEventListener(
-        "transitionend",
-        (event) => {
-          pizzaName.classList.add("is-finished");
-          printButton.hidden = false;
-        },
-        { once: true },
-      );
     });
 
     nameForm.addEventListener(
@@ -685,6 +674,43 @@ export function init(data) {
       { once: true },
     );
   });
+
+  const createRecipeCard = () => {
+    // Pizza name
+    recipeName.textContent = pizzaName.textContent;
+
+    // Ingredient list
+    recipeIngredients.innerHTML = "";
+
+    data.steps.forEach((step) => {
+      if (step.id === "name") {
+        return;
+      }
+
+      const selectedIds = selections.get(step.id) || [];
+
+      selectedIds.forEach((optionId) => {
+        const option = step.options?.find((item) => item.id === optionId);
+
+        if (!option) {
+          return;
+        }
+
+        const item = document.createElement("li");
+
+        item.textContent = option.label;
+
+        recipeIngredients.appendChild(item);
+      });
+    });
+
+    // Copy the finished pizza into the recipe card.
+    recipePizza.innerHTML = "";
+
+    const pizzaClone = builtPizza.cloneNode(true);
+
+    recipePizza.appendChild(pizzaClone);
+  };
 
   // --------------------------------
   // Initialize

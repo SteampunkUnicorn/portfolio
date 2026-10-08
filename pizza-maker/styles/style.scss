@@ -526,6 +526,7 @@ p {
 
     &[data-crust="deep-dish"] {
       background-image: url("../images/deep-dish.png");
+      background-size: 108%;
     }
 
     &[data-crust="flatbread"] {
@@ -567,6 +568,7 @@ p {
 
     &[data-category="sauce"] {
       z-index: 10;
+      background-size: 90%;
     }
 
     &[data-category="cheese"] {
@@ -575,6 +577,7 @@ p {
 
     &[data-category="proteins"] {
       z-index: 30;
+      background-size: 90%;
     }
 
     &[data-category="vegetables"] {
