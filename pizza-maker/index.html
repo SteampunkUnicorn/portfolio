@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pizza</title>
+
+    <link rel="stylesheet" href="styles/style.min.css" />
+  </head>
+
+  <body>
+    <section class="pizza-builder">
+      <nav
+        class="pizza-builder--navigation"
+        aria-label="Pizza building steps"
+      ></nav>
+      <section class="pizza-builder--done">
+        <div class="pizza-builder--done_label">
+          <form class="pizza-builder--name-form">
+            <label for="pizza-name">Name your pizza</label>
+
+            <div class="pizza-builder--name-controls">
+              <input
+                type="text"
+                id="pizza-name"
+                class="pizza-builder--name-input"
+                placeholder="The Midnight Margherita"
+                autocomplete="off"
+                required
+              />
+
+              <button type="submit" class="pizza-builder--name-submit">
+                Name It
+              </button>
+            </div>
+          </form>
+
+          <span class="pizza-builder--pizza-name" hidden></span>
+        </div>
+
+        <div class="pizza-builder--summary">
+          <ul class="pizza-builder--ingredient-list"></ul>
+        </div>
+      </section>
+
+      <div class="pizza-builder--play-surface">
+        <div
+          class="pizza-builder--ingredient-section pizza-builder--size"
+        ></div>
+
+        <div
+          class="pizza-builder--ingredient-section pizza-builder--crust"
+        ></div>
+
+        <div
+          class="pizza-builder--ingredient-section pizza-builder--sauce"
+        ></div>
+
+        <div
+          class="pizza-builder--ingredient-section pizza-builder--cheese"
+        ></div>
+
+        <div
+          class="pizza-builder--ingredient-section pizza-builder--proteins"
+        ></div>
+
+        <div
+          class="pizza-builder--ingredient-section pizza-builder--vegetables"
+        ></div>
+      </div>
+
+      <div class="pizza-builder--table">
+        <div class="pizza-builder--pan">
+          <div class="pizza-builder--built-pizza">
+            <div class="pizza-builder--pizza-toppings" aria-hidden="true"></div>
+          </div>
+        </div>
+
+        <button type="button" class="pizza-builder--complete" hidden>
+          Complete Pizza
+        </button>
+      </div>
+    </section>
+
+    <script type="module">
+      import { init } from "./js/script.js";
+
+      const res = await fetch("./data/data.json");
+      const data = await res.json();
+
+      init(data);
+    </script>
+  </body>
+</html>
