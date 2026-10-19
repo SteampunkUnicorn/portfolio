@@ -542,6 +542,36 @@ button:focus-visible {
 .project {
   min-width: 0;
 }
+// The title link stretches across the featured card without nesting links.
+.project--featured {
+  position: relative;
+}
+.project__card-link {
+  color: inherit;
+  text-decoration: none;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+  }
+  &:focus-visible {
+    outline: none;
+  }
+  &:focus-visible::after {
+    outline: 3px solid #1e739c;
+    outline-offset: 5px;
+  }
+}
+.project--featured:hover .project__details h3 {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.12em;
+}
+.project--featured .project__link {
+  position: relative;
+  z-index: 4;
+}
 .project__visual {
   position: relative;
   overflow: hidden;
