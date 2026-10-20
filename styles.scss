@@ -222,7 +222,7 @@ h2 {
   }
 }
 
-#experience {
+#section--experience {
   .job {
     margin-bottom: 1.6rem;
 
@@ -387,6 +387,8 @@ button:focus-visible {
 }
 .hero {
   padding-top: clamp(5rem, 9vw, 13rem);
+  position: relative;
+  z-index: 2;
 }
 .hero__eyebrow {
   display: flex;
@@ -513,6 +515,8 @@ button:focus-visible {
 }
 .showcase {
   padding: clamp(6rem, 9vw, 12rem) 0;
+  position: relative;
+  z-index: 1;
 }
 .section-head {
   display: flex;
@@ -541,6 +545,8 @@ button:focus-visible {
 }
 .project {
   min-width: 0;
+  position: relative;
+  isolation: isolate;
 }
 // The title link stretches across the featured card without nesting links.
 .project--featured {
@@ -774,6 +780,7 @@ button:focus-visible {
   align-items: start;
   gap: 3rem;
   border-top: 1px solid var(--dark);
+  border-bottom: 1px solid var(--line);
   padding: 5rem 0;
   h2 {
     font: 600 clamp(3rem, 4.2vw, 5rem)/1.1 var(--font-heading);
@@ -1019,5 +1026,111 @@ button:focus-visible {
       padding: 2rem 0.35rem;
       font: 400 1.5rem/1.4 var(--font-details);
     }
+  }
+}
+
+// Next experiment teaser — intentionally not linked until the project exists.
+.up-next {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(3rem, 7vw, 9rem);
+  align-items: center;
+  margin-top: clamp(8rem, 13vw, 16rem);
+  border-top: 1px solid var(--line);
+  padding-top: clamp(4rem, 7vw, 8rem);
+
+  &__intro {
+    h3 {
+      font: 600 clamp(3.8rem, 5.5vw, 7.2rem)/1.05 var(--font-heading);
+      letter-spacing: -0.055em;
+      margin: 1.6rem 0 2rem;
+      color: var(--dark);
+    }
+    p {
+      max-width: 52rem;
+      color: #52675e;
+      font-size: clamp(1.5rem, 1.6vw, 1.8rem);
+      line-height: 1.6;
+    }
+  }
+  &__status {
+    display: inline-flex;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 3rem;
+    font: 400 1.1rem var(--font-details);
+    letter-spacing: 0.08em;
+    color: #52675e;
+  }
+  &__status-dot {
+    width: 0.85rem;
+    height: 0.85rem;
+    border: 1px solid #567868;
+    border-radius: 50%;
+  }
+  &__visual {
+    position: relative;
+    min-height: clamp(28rem, 34vw, 45rem);
+    background: #dfe5dc;
+    overflow: hidden;
+    isolation: isolate;
+  }
+}
+.card-study {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 57%;
+  aspect-ratio: 0.85;
+  padding: clamp(1.5rem, 2.2vw, 2.5rem);
+  font: 400 clamp(0.9rem, 1vw, 1.2rem) var(--font-details);
+  letter-spacing: 0.04em;
+  box-shadow: 0 1.5rem 3rem #1b2b2840;
+  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+  &--back {
+    top: 8%;
+    left: 8%;
+    background: #c6d6b8;
+    color: #1d392e;
+    transform: rotate(-15deg);
+  }
+  &--middle {
+    top: 14%;
+    left: 25%;
+    background: #b0bdcf;
+    color: #243247;
+    transform: rotate(8deg);
+  }
+  &--front {
+    top: 23%;
+    left: 21%;
+    background: #263445;
+    color: #f1f3e7;
+    transform: rotate(-4deg);
+    strong {
+      font: 600 clamp(2rem, 3vw, 4rem)/1.08 var(--font-heading);
+      letter-spacing: -0.045em;
+    }
+  }
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .up-next__visual:hover .card-study--back {
+    transform: translate(-1.5rem, -1rem) rotate(-21deg);
+  }
+  .up-next__visual:hover .card-study--middle {
+    transform: translate(2rem, -1rem) rotate(14deg);
+  }
+  .up-next__visual:hover .card-study--front {
+    transform: translateY(-1rem) rotate(0deg);
+  }
+}
+@media (max-width: 767px) {
+  .up-next {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 3rem;
+  }
+  .up-next__visual {
+    min-height: 32rem;
   }
 }

@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#101f26" />
+    <meta name="description" content="Kinetic Type: a small experiment in variable typography, pointer physics, and accessible motion." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Syne:wght@400..800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+    <title>Kinetic Type — The Interface Lab</title>
+  <link rel="stylesheet" href="../lab-navigation.css" />
+</head>
+  <body>
+<nav class="lab-pathbar" aria-label="Interface Lab navigation"><div class="lab-pathbar__inner"><div class="lab-pathbar__home"><span class="lab-pathbar__stamp">CS / INTERFACE LAB</span><span aria-hidden="true">/</span><span>KINETIC TYPE</span></div><div class="lab-pathbar__links"><a href="../">All experiments</a><a href="../micro-experiments/">Micro experiments</a><a href="../../">Portfolio ↗</a></div></div></nav>
+    <a class="skip-link" href="#controls">Skip to controls</a>
+    <div class="lab-shell">
+      <header class="masthead">
+        <a class="brand" href="../" aria-label="Back to Interface Lab"><span class="brand__mark" aria-hidden="true">↗</span> INTERFACE LAB</a>
+        <span class="masthead__number">EXPERIMENT / 001</span>
+        <a class="masthead__portfolio" href="../../">← PORTFOLIO</a>
+      </header>
+
+      <main>
+        <section class="intro" aria-labelledby="page-title">
+          <div class="intro__eyebrow"><span class="signal" aria-hidden="true"></span> TYPE / MOTION / INTERACTION</div>
+          <h1 id="page-title">Kinetic <em>Type.</em></h1>
+          <div class="intro__footer">
+            <p>Typography with a gravitational pull. Move your cursor through the letters, then change the rules.</p>
+            <span class="intro__hint" aria-hidden="true">↓ PLAY BELOW</span>
+          </div>
+        </section>
+
+        <section class="workspace" aria-label="Interactive typography experiment">
+          <div class="stage" id="stage">
+            <div class="stage__top"><span>CANVAS / LIVE</span><span class="stage__status" id="stage-status">MOTION ON</span></div>
+            <div class="stage__content" id="stage-content">
+              <div class="kinetic" id="kinetic" role="img" aria-label="Make something move"></div>
+            </div>
+            <div class="stage__bottom"><span>MOVE POINTER TO DISTORT</span><span id="stage-coordinates">X — / Y —</span></div>
+          </div>
+
+          <aside class="controls" id="controls" aria-labelledby="controls-title">
+            <div class="controls__heading"><span class="tiny-label">CONTROL PANEL</span><h2 id="controls-title">Tune the type<span aria-hidden="true">↗</span></h2><p>Adjust the typography and how strongly the letters respond.</p></div>
+            <div class="field">
+              <label for="phrase">YOUR PHRASE</label>
+              <input id="phrase" type="text" value="Make something move" maxlength="36" spellcheck="false" autocomplete="off" />
+              <div class="field__foot"><span>EDIT THE CANVAS COPY</span><output id="character-count" for="phrase">19 / 36</output></div>
+            </div>
+            <div class="field field--slider"><label for="weight">WEIGHT <output id="weight-value" for="weight">700</output></label><input id="weight" type="range" min="400" max="800" step="10" value="700" /></div>
+            <div class="field field--slider"><label for="spacing">LETTER SPACING <output id="spacing-value" for="spacing">0.00 em</output></label><input id="spacing" type="range" min="-0.06" max="0.12" step="0.01" value="0" /></div>
+            <div class="field field--slider"><label for="strength">MAGNETISM <output id="strength-value" for="strength">42 px</output></label><input id="strength" type="range" min="0" max="90" step="1" value="42" /></div>
+            <div class="field field--slider"><label for="radius">INFLUENCE <output id="radius-value" for="radius">180 px</output></label><input id="radius" type="range" min="70" max="360" step="10" value="180" /></div>
+            <div class="controls__actions"><button class="button button--primary" id="toggle-motion" type="button" aria-pressed="false">Pause motion <span aria-hidden="true">Ⅱ</span></button><button class="button button--secondary" id="reset" type="button">Reset ↺</button></div>
+            <button class="copy-button" id="copy-css" type="button">Copy typography CSS <span aria-hidden="true">↗</span></button>
+            <p class="controls__note" id="motion-note">Keyboard friendly. Motion is disabled by default when your system requests reduced motion.</p>
+            <p class="sr-only" id="announcer" role="status" aria-live="polite"></p>
+          </aside>
+        </section>
+
+        <section class="notes" aria-labelledby="notes-title">
+          <div><span class="tiny-label">UNDER THE HOOD / 001</span><h2 id="notes-title">A little physics.<br /><em>A lot of personality.</em></h2></div>
+          <div class="notes__body"><p>Every visible character is rendered into its own visual span. Distance from the pointer determines a target offset; a spring-like easing loop carries each letter to that position and back again.</p><p>The text stays readable to assistive technology as one label, the interface works without motion, and all controls use native HTML inputs.</p><ul class="tech-list" aria-label="Technologies used"><li>VANILLA JS</li><li>POINTER EVENTS</li><li>REQUESTANIMATIONFRAME</li><li>VARIABLE FONTS</li><li>REDUCED MOTION</li></ul></div>
+        </section>
+      </main>
+      <footer class="footer"><span>MADE TO EXPERIMENT, NOT TO SHIP.</span><a href="../../">BACK TO PORTFOLIO ↗</a></footer>
+    </div>
+  </body>
+</html>

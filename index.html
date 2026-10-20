@@ -107,11 +107,60 @@
           <div class="project-grid">
             <article class="project project--featured">
               <div
+                class="project__visual project__visual--lab"
+                aria-label="Abstract illustration of an interface experiment"
+              >
+                <div class="project__visual-top">
+                  <span>INTERFACE STUDIES</span><span>001 / LAB</span>
+                </div>
+                <div class="lab-graphic" aria-hidden="true">
+                  <div class="lab-graphic__frame">
+                    <span class="lab-graphic__dot"></span
+                    ><span class="lab-graphic__rule"></span
+                    ><span class="lab-graphic__square"></span
+                    ><span class="lab-graphic__circle"></span
+                    ><span class="lab-graphic__caption"
+                      >explore { possibilities }</span
+                    >
+                  </div>
+                </div>
+                <div class="project__visual-bottom">
+                  <span>EXPERIMENT / ITERATE / REFINE</span
+                  ><span aria-hidden="true">↗</span>
+                </div>
+              </div>
+              <div class="project__details">
+                <div>
+                  <span class="micro-label">01 — EXPERIMENTAL FRONTEND</span>
+                  <h3>
+                    <a class="project__card-link" href="./interface-lab/"
+                      >The Interface Lab <span aria-hidden="true">↗</span></a
+                    >
+                  </h3>
+                  <p>
+                    Eleven hands-on experiments in CSS, JavaScript,
+                    accessibility, and modern browser interfaces.
+                  </p>
+                </div>
+                <div class="project__footer">
+                  <ul class="tag-list" aria-label="Topics">
+                    <li>CSS</li>
+                    <li>Interaction</li>
+                    <li>Experiments</li>
+                  </ul>
+                  <a class="project__link" href="./interface-lab/"
+                    >Explore the lab <span aria-hidden="true">↗</span></a
+                  >
+                </div>
+              </div>
+            </article>
+            <article class="project project--secondary">
+              <div
                 class="project__visual project__visual--pizza"
                 aria-label="Abstract illustration of an interactive pizza builder"
               >
                 <div class="project__visual-top">
-                  <span>INTERACTIVE PLAYGROUND</span><span>001 ↗</span>
+                  <span>INTERACTIVE PLAYGROUND</span><span>002 ↗</span>
                 </div>
                 <div class="pizza-graphic" aria-hidden="true">
                   <span
@@ -134,7 +183,7 @@
               </div>
               <div class="project__details">
                 <div>
-                  <span class="micro-label">01 — INTERACTIVE UI</span>
+                  <span class="micro-label">02 — INTERACTIVE UI</span>
                   <h3>
                     <a
                       class="project__card-link"
@@ -163,52 +212,36 @@
                 </div>
               </div>
             </article>
-            <article class="project project--secondary">
-              <div
-                class="project__visual project__visual--lab"
-                aria-label="Abstract illustration of an interface experiment"
-              >
-                <div class="project__visual-top">
-                  <span>INTERFACE STUDIES</span><span>002 / LAB</span>
-                </div>
-                <div class="lab-graphic" aria-hidden="true">
-                  <div class="lab-graphic__frame">
-                    <span class="lab-graphic__dot"></span
-                    ><span class="lab-graphic__rule"></span
-                    ><span class="lab-graphic__square"></span
-                    ><span class="lab-graphic__circle"></span
-                    ><span class="lab-graphic__caption"
-                      >explore { possibilities }</span
-                    >
-                  </div>
-                </div>
-                <div class="project__visual-bottom">
-                  <span>EXPERIMENT / ITERATE / REFINE</span
-                  ><span aria-hidden="true">↗</span>
-                </div>
-              </div>
-              <div class="project__details">
-                <div>
-                  <span class="micro-label">02 — WORK IN PROGRESS</span>
-                  <h3>The Interface Lab</h3>
-                  <p>
-                    A future collection of small experiments in CSS, interaction
-                    design, and browser capabilities.
-                  </p>
-                </div>
-                <div class="project__footer">
-                  <ul class="tag-list" aria-label="Topics">
-                    <li>CSS</li>
-                    <li>Interaction</li>
-                    <li>Experiments</li>
-                  </ul>
-                  <span class="project__status"
-                    >More to come <span aria-hidden="true">↗</span></span
-                  >
-                </div>
-              </div>
-            </article>
           </div>
+
+          <section class="up-next" aria-labelledby="up-next-title">
+            <div class="up-next__intro">
+              <span class="micro-label">03 / UP NEXT</span>
+              <h3 id="up-next-title">Card <em>experiments.</em></h3>
+              <p>
+                An upcoming collection exploring cards as interactive
+                interfaces—layered layouts, transitions, responsive behavior,
+                and delightful details.
+              </p>
+              <span class="up-next__status"
+                ><span class="up-next__status-dot" aria-hidden="true"></span> IN
+                DEVELOPMENT</span
+              >
+            </div>
+            <div class="up-next__visual" aria-hidden="true">
+              <div class="card-study card-study--back">
+                <span>03 / CARDS</span><span>LAYOUT</span>
+              </div>
+              <div class="card-study card-study--middle">
+                <span>HOVER</span><span>TRANSITION</span>
+              </div>
+              <div class="card-study card-study--front">
+                <span>UI / STUDIES</span
+                ><strong>Cards, with<br />character.</strong
+                ><span>EXPLORE WHAT'S NEXT ↗</span>
+              </div>
+            </div>
+          </section>
         </section>
 
         <section class="resume-intro" aria-labelledby="resume-intro-title">
