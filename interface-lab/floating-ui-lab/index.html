@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#111d25" />
+    <meta name="description" content="Explore native popovers, CSS anchor positioning, and collision-aware floating interfaces." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+    <title>Floating UI Laboratory — Interface Lab</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#lab-controls">Skip to lab controls</a>
+    <div class="shell">
+      <header class="topbar">
+        <a class="brand" href="../">CS<span aria-hidden="true">/</span> INTERFACE LAB</a>
+        <span class="edition">EXPERIMENT 002 <span aria-hidden="true">↗</span></span>
+      </header>
+
+      <main>
+        <section class="intro" aria-labelledby="page-title">
+          <div class="intro__eyebrow"><span class="live-dot" aria-hidden="true"></span> NATIVE BROWSER EXPERIMENT / 002</div>
+          <h1 id="page-title">Floating <span>UI.</span><br />No guesswork.</h1>
+          <p>Move a trigger. Push it against the edges. Watch the browser find room for a floating surface—then inspect the rules that make it work.</p>
+        </section>
+
+        <section class="lab" aria-label="Floating UI experiment">
+          <div class="lab__main">
+            <div class="lab__heading">
+              <div><span class="eyebrow">01 / THE STAGE</span><h2>Drag. Dock. Discover.</h2></div>
+              <span class="lab__state" id="api-state">Checking browser features…</span>
+            </div>
+            <div class="stage" id="stage" aria-label="Interactive positioning stage">
+              <div class="stage__workspace" id="stage-workspace">
+              <span class="stage__corner stage__corner--tl" aria-hidden="true">TL</span>
+              <span class="stage__corner stage__corner--tr" aria-hidden="true">TR</span>
+              <span class="stage__corner stage__corner--bl" aria-hidden="true">BL</span>
+              <span class="stage__corner stage__corner--br" aria-hidden="true">BR</span>
+              <span class="stage__crosshair" aria-hidden="true"></span>
+              <div class="stage__hint">DRAG THE BUTTON OR SELECT A DOCK</div>
+              <button
+                class="trigger" id="trigger" type="button"
+                popovertarget="floating-panel" popovertargetaction="toggle"
+                aria-label="Toggle floating panel. Drag to change position."
+                style="--x: 50%; --y: 50%;"
+              ><span class="trigger__grip" aria-hidden="true">⠿</span> Open popover <span aria-hidden="true">↗</span></button>
+              </div>
+            </div>
+            <div class="stage-footer">
+              <div class="dock" role="group" aria-label="Dock trigger at a location">
+                <button class="dock__button" data-dock="tl" type="button">↖ <span class="sr-only">Top left</span></button>
+                <button class="dock__button" data-dock="tc" type="button">↑ <span class="sr-only">Top center</span></button>
+                <button class="dock__button" data-dock="tr" type="button">↗ <span class="sr-only">Top right</span></button>
+                <button class="dock__button" data-dock="ml" type="button">← <span class="sr-only">Middle left</span></button>
+                <button class="dock__button is-current" data-dock="mc" type="button" aria-pressed="true">⊙ <span class="sr-only">Center</span></button>
+                <button class="dock__button" data-dock="mr" type="button">→ <span class="sr-only">Middle right</span></button>
+                <button class="dock__button" data-dock="bl" type="button">↙ <span class="sr-only">Bottom left</span></button>
+                <button class="dock__button" data-dock="bc" type="button">↓ <span class="sr-only">Bottom center</span></button>
+                <button class="dock__button" data-dock="br" type="button">↘ <span class="sr-only">Bottom right</span></button>
+              </div>
+              <div class="readout" aria-live="off"><span>REQUESTED <strong id="requested-readout">BOTTOM</strong></span><span>RENDERED <strong id="rendered-readout">—</strong></span></div>
+            </div>
+          </div>
+
+          <aside class="controls" id="lab-controls" aria-labelledby="controls-title">
+            <span class="eyebrow">02 / THE CONTROLS</span>
+            <h2 id="controls-title">Adjust the rules.</h2>
+            <p>Change the constraints and see how native placement responds.</p>
+            <div class="field"><label for="scenario">Test scenario</label>
+              <select id="scenario">
+                <option value="default">Open canvas</option>
+                <option value="edge">Viewport edge</option>
+                <option value="oversized">Oversized popover</option>
+                <option value="constrained">Narrow stage (not viewport)</option>
+                <option value="scroll">Scrollable container</option>
+              </select>
+              <p class="field__help" id="scenario-description">Freely move the trigger to test positioning.</p>
+            </div>
+            <div class="field"><label for="placement">Preferred placement</label>
+              <select id="placement"><option value="bottom">Bottom</option><option value="top">Top</option><option value="right">Right</option><option value="left">Left</option></select>
+            </div>
+            <div class="field"><div class="field__label"><label for="panel-width">Panel width</label><output id="width-value" for="panel-width">260px</output></div><input type="range" id="panel-width" min="180" max="360" step="10" value="260" /></div>
+            <div class="field"><div class="field__label"><label for="gap">Anchor gap</label><output id="gap-value" for="gap">12px</output></div><input type="range" id="gap" min="4" max="32" step="2" value="12" /></div>
+            <label class="check"><input type="checkbox" id="fall-backs" checked /><span>Allow collision fallbacks</span></label>
+            <label class="check"><input type="checkbox" id="auto-open" checked /><span>Keep popover open when docking</span></label>
+            <div class="controls__actions"><button class="button button--primary" id="open-button" type="button">Open panel <span aria-hidden="true">↗</span></button><button class="button button--secondary" id="reset-button" type="button">Reset</button></div>
+            <p class="controls__tip">Keyboard tip: use the dock buttons to move the trigger without dragging. Press <kbd>Esc</kbd> to dismiss the popover.</p>
+          </aside>
+        </section>
+
+        <section class="inspector" aria-labelledby="inspector-title">
+          <div class="inspector__heading"><div><span class="eyebrow">03 / LIVE INSPECTOR</span><h2 id="inspector-title">The CSS behind the behavior.</h2></div><button id="copy-css" class="inspector__copy" type="button">Copy CSS ↗</button></div>
+          <p id="inspector-explanation">Change the controls to generate the positioning declarations. The rendered placement is determined by available viewport space.</p>
+          <pre class="inspector__code"><code id="css-output"></code></pre>
+          <p class="inspector__status" id="copy-status" role="status" aria-live="polite"></p>
+        </section>
+        <section class="notes" aria-labelledby="notes-title">
+          <div><span class="eyebrow">04 / UNDER THE HOOD</span><h2 id="notes-title">Let the platform do the hard part.</h2></div>
+          <div class="notes__content"><p>The panel uses the <strong>Popover API</strong> to enter the top layer, and <strong>CSS Anchor Positioning</strong> to follow the trigger. <code>position-try-fallbacks</code> asks the browser to select another side when the preferred one overflows the viewport.</p><p>This is a deliberate progressive-enhancement experiment: browsers without anchor positioning use a minimal JavaScript positioning fallback. The native version needs no per-frame geometry calculations. Note: narrowing the stage alone does not change the viewport collision boundary. The scroll scenario shows how a top-layer popover follows an anchor in scrolling content.</p><div class="notes__links"><a href="https://developer.mozilla.org/en-US/docs/Web/API/Popover_API" target="_blank" rel="noopener noreferrer">Popover API ↗</a><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Anchor_positioning" target="_blank" rel="noopener noreferrer">Anchor positioning ↗</a></div></div>
+        </section>
+      </main>
+      <footer class="footer"><span>CLAIR SMITH / INTERFACE LAB</span><span>BUILT WITH HTML · CSS · JS</span></footer>
+    </div>
+
+    <div class="floating-panel" id="floating-panel" popover="auto" data-placement="bottom" role="group" aria-label="Floating panel demonstration">
+      <div class="floating-panel__eyebrow"><span class="panel-dot" aria-hidden="true"></span> FLOATING SURFACE <button type="button" id="close-panel" aria-label="Close popover">×</button></div>
+      <h3>Perfectly placed?</h3>
+      <p>This surface lives in the browser’s top layer. Move the trigger near an edge to test fallback placement.</p>
+      <div class="floating-panel__footer"><span>POPOVER + ANCHOR</span><span aria-hidden="true">↗</span></div>
+    </div>
+  </body>
+</html>
