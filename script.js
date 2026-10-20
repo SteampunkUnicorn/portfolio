@@ -1,5 +1,5 @@
 "use strict";
-console.log("hi clair");
+
 // The first iteration is intentionally progressive-enhancement friendly:
 // navigation, project links, and the layout work without JavaScript.
 
@@ -11,10 +11,7 @@ if (year) year.textContent = String(new Date().getFullYear());
 const navigation = document.querySelector(".site-nav");
 const sectionLinks = [...(navigation?.querySelectorAll('a[href^="#"]') ?? [])];
 const targets = sectionLinks
-  .map((link) => ({
-    link,
-    target: document.querySelector(link.getAttribute("href")),
-  }))
+  .map((link) => ({ link, target: document.querySelector(link.getAttribute("href")) }))
   .filter(({ target }) => target);
 
 if ("IntersectionObserver" in window && targets.length) {
@@ -23,8 +20,7 @@ if ("IntersectionObserver" in window && targets.length) {
       for (const entry of entries) {
         if (!entry.isIntersecting) continue;
         for (const { link, target } of targets) {
-          if (target === entry.target)
-            link.setAttribute("aria-current", "location");
+          if (target === entry.target) link.setAttribute("aria-current", "location");
           else link.removeAttribute("aria-current");
         }
       }
@@ -33,3 +29,17 @@ if ("IntersectionObserver" in window && targets.length) {
   );
   targets.forEach(({ target }) => observer.observe(target));
 }
+
+// Deep links should reveal collapsed resume content before scrolling to it.
+// Native details/summary handles all toggle interaction and keyboard input.
+function revealResumeHash() {
+  const hash = window.location.hash;
+  if (!hash || hash.length < 2) return;
+  const target = document.getElementById(decodeURIComponent(hash.slice(1)));
+  if (!target) return;
+  const disclosure = target.closest(".resume-disclosure") || target.querySelector(".resume-disclosure");
+  if (disclosure) disclosure.open = true;
+}
+
+revealResumeHash();
+window.addEventListener("hashchange", revealResumeHash);

@@ -222,7 +222,7 @@ h2 {
   }
 }
 
-#section--experience {
+#experience {
   .job {
     margin-bottom: 1.6rem;
 
@@ -774,7 +774,6 @@ button:focus-visible {
   align-items: start;
   gap: 3rem;
   border-top: 1px solid var(--dark);
-  border-bottom: 1px solid var(--line);
   padding: 5rem 0;
   h2 {
     font: 600 clamp(3rem, 4.2vw, 5rem)/1.1 var(--font-heading);
@@ -923,5 +922,102 @@ button:focus-visible {
   *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+// Native resume accordion — fully functional without JavaScript.
+.resume__content {
+  padding-top: 2rem;
+  .section {
+    display: block;
+    padding: 0;
+    border-bottom: 1px solid var(--line);
+    &:first-child {
+      border-top: 1px solid var(--line);
+    }
+  }
+  .resume-disclosure {
+    width: 100%;
+  }
+  .resume-disclosure > .section__title {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    margin: 0;
+    padding: 2.3rem 0.35rem;
+    min-width: 0;
+    cursor: pointer;
+    list-style: none;
+    font: 400 clamp(1.5rem, 1.6vw, 2rem)/1.35 var(--font-details);
+    color: var(--dark);
+    text-transform: uppercase;
+    white-space: normal;
+    &::-webkit-details-marker {
+      display: none;
+    }
+    &::marker {
+      content: "";
+    }
+    &::after {
+      content: none;
+    }
+    &:hover {
+      color: #517e65;
+    }
+    &:focus-visible {
+      outline: 2px solid currentColor;
+      outline-offset: 5px;
+    }
+  }
+  .resume-disclosure__icon {
+    display: block;
+    width: 1.3rem;
+    height: 1.3rem;
+    flex: 0 0 1.3rem;
+    position: relative;
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      background: currentColor;
+      transform: translate(-50%, -50%);
+      transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+    }
+    &::before {
+      width: 1.3rem;
+      height: 1px;
+    }
+    &::after {
+      width: 1px;
+      height: 1.3rem;
+    }
+  }
+  .resume-disclosure[open] .resume-disclosure__icon::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+    opacity: 0;
+  }
+  .resume-disclosure > .section__content {
+    padding: 0 0.35rem 3.5rem;
+    max-width: 95rem;
+  }
+  .resume-disclosure > .section__content > .section__label {
+    margin-top: 0;
+  }
+  // Override the pre-existing mobile-only section layout rules.
+  @media (max-width: 700px) {
+    .section {
+      display: block;
+    }
+    .section .section__title {
+      display: flex;
+      padding: 2rem 0.35rem;
+      font: 400 1.5rem/1.4 var(--font-details);
+    }
   }
 }
