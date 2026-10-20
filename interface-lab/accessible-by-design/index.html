@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="Accessible by Design: an interactive comparison of UI patterns, accessibility decisions, and browser behavior.">
+  <title>Accessible by Design — Interface Lab / 003</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to experiment</a>
+  <header class="site-header wrap">
+    <a href="../../" class="brand">CS <span>/ INTERFACE LAB</span></a>
+    <span class="issue">EXPERIMENT 003 <span aria-hidden="true">↗</span></span>
+  </header>
+  <main id="main" class="wrap">
+    <section class="intro" aria-labelledby="page-title">
+      <p class="eyebrow">INTERFACE LAB / ACCESSIBILITY ENGINEERING</p>
+      <h1 id="page-title">Accessible <em>by Design.</em></h1>
+      <p class="lede">A UI can look finished and still be frustrating to use. Compare two implementations, try the interactions, and inspect what changes beneath the surface.</p>
+    </section>
+
+    <section class="workbench" aria-labelledby="workbench-heading">
+      <div class="section-head">
+        <div><p class="eyebrow">01 / LIVE WORKBENCH</p><h2 id="workbench-heading">Same idea. Different experience.</h2></div>
+        <p class="section-note">Try <kbd>Tab</kbd>, <kbd>Shift</kbd> + <kbd>Tab</kbd>, <kbd>Enter</kbd>, and <kbd>Esc</kbd>.</p>
+      </div>
+      <div class="workbench__toolbar">
+        <fieldset class="pattern-switch" aria-label="Choose a UI pattern">
+          <legend class="sr-only">UI pattern</legend>
+          <button class="pattern-switch__button is-active" type="button" data-pattern-button="dialog" aria-pressed="true">01 Dialog</button>
+          <button class="pattern-switch__button" type="button" data-pattern-button="form" aria-pressed="false">02 Form</button>
+          <button class="pattern-switch__button" type="button" data-pattern-button="status" aria-pressed="false">03 Status</button>
+        </fieldset>
+        <label class="focus-control"><input type="checkbox" id="show-focus"> Always show focus outlines <span class="hint">(visual aid)</span></label>
+      </div>
+      <div class="order-toolbar" aria-label="Focus order inspector controls">
+        <label class="focus-control"><input type="checkbox" id="show-order"> Show numbered focus stops</label>
+        <button type="button" class="order-button" id="step-focus">Focus next stop <span aria-hidden="true">→</span></button>
+        <button type="button" class="order-button" id="refresh-order">Refresh order</button>
+        <span id="order-count" class="order-count" role="status" aria-live="polite">Visualizer off</span>
+      </div>
+      <p id="pattern-intro" class="pattern-intro">A modal needs more than a panel that looks like a modal.</p>
+
+      <div class="comparison">
+        <section class="comparison__pane comparison__pane--flawed" aria-labelledby="flawed-title">
+          <header class="pane-header"><p class="eyebrow">VERSION A / INTENTIONALLY FLAWED</p><h3 id="flawed-title">Looks right.</h3></header>
+          <div class="demo" data-pattern="dialog" data-version="flawed">
+            <p class="demo__intro">This button reveals a look-alike overlay. The background remains interactive.</p>
+            <button type="button" class="demo-button" id="flawed-open">Open “dialog”</button>
+            <div id="flawed-overlay" class="fake-overlay" hidden>
+              <div class="fake-modal">
+                <p class="fake-modal__title">Preferences</p>
+                <p>It looks modal, but focus isn't managed and the page underneath is still available.</p>
+                <button type="button" class="demo-button" id="flawed-close">Close panel</button>
+              </div>
+            </div>
+          </div>
+          <div class="demo" data-pattern="form" data-version="flawed" hidden>
+            <p class="demo__intro">Placeholder-only input and an error without a field association.</p>
+            <form id="flawed-form" novalidate>
+              <input class="field" id="flawed-email" type="email" placeholder="Email address" autocomplete="off">
+              <button class="demo-button" type="submit">Join newsletter</button>
+              <p class="form-feedback" id="flawed-feedback"></p>
+            </form>
+          </div>
+          <div class="demo" data-pattern="status" data-version="flawed" hidden>
+            <p class="demo__intro">The count updates visually, but assistive technology isn't explicitly notified.</p>
+            <button type="button" class="demo-button" id="flawed-add">Add item</button>
+            <p class="counter">Items added: <strong id="flawed-count">0</strong></p>
+          </div>
+          <p class="pane-foot">A visual match is not a functional match.</p>
+        </section>
+
+        <section class="comparison__pane comparison__pane--improved" aria-labelledby="improved-title">
+          <header class="pane-header"><p class="eyebrow">VERSION B / PURPOSEFULLY BUILT</p><h3 id="improved-title">Works better.</h3></header>
+          <div class="demo" data-pattern="dialog" data-version="improved">
+            <p class="demo__intro">Native modal behavior, labelled content, Escape to close, and sensible focus return.</p>
+            <button type="button" class="demo-button demo-button--accent" id="good-open">Open dialog</button>
+            <dialog id="good-dialog" aria-labelledby="good-dialog-title" aria-describedby="good-dialog-description">
+              <div class="dialog-inner">
+                <p class="eyebrow">NATIVE DIALOG</p>
+                <h4 id="good-dialog-title">Preferences</h4>
+                <p id="good-dialog-description">The browser keeps keyboard focus in this modal while it's open.</p>
+                <label class="dialog-check"><input type="checkbox"> Send me occasional updates</label>
+                <form method="dialog"><button type="submit" class="demo-button demo-button--accent" autofocus>Close dialog</button></form>
+              </div>
+            </dialog>
+          </div>
+          <div class="demo" data-pattern="form" data-version="improved" hidden>
+            <p class="demo__intro">A persistent label, inline error association, and focus directed to the problem.</p>
+            <form id="good-form" novalidate>
+              <label for="good-email" class="field-label">Email address <span aria-hidden="true">*</span></label>
+              <p class="field-help" id="good-email-hint">We'll use this only for experiment updates.</p>
+              <input class="field" id="good-email" type="email" autocomplete="email" required aria-describedby="good-email-hint">
+              <p class="form-feedback" id="good-feedback" aria-live="polite"></p>
+              <button class="demo-button demo-button--accent" type="submit">Join newsletter</button>
+            </form>
+          </div>
+          <div class="demo" data-pattern="status" data-version="improved" hidden>
+            <p class="demo__intro">A polite live region communicates updates without stealing focus.</p>
+            <button type="button" class="demo-button demo-button--accent" id="good-add">Add item</button>
+            <p class="counter">Items added: <strong id="good-count">0</strong></p>
+            <p id="good-status" class="status-message" role="status" aria-atomic="true"></p>
+          </div>
+          <p class="pane-foot">Native semantics first. Enhancements where needed.</p>
+        </section>
+      </div>
+
+      <section class="focus-lab" aria-labelledby="focus-lab-heading">
+        <div class="focus-lab__head">
+          <div><p class="eyebrow">02 / FOCUS ORDER VISUALIZER</p><h3 id="focus-lab-heading">Same elements. Different sequence.</h3></div>
+          <p>Follow the numbered circles, then use <kbd>Tab</kbd>. The flawed layout changes visual order with CSS but leaves the DOM—and keyboard sequence—unchanged.</p>
+        </div>
+        <div class="focus-lab__grid">
+          <div class="focus-lab__example">
+            <span class="focus-lab__tag">VERSION A / VISUALLY REORDERED</span>
+            <div class="order-demo order-demo--mismatch" data-focus-scope="mismatch">
+              <button type="button" class="order-demo__tile order-demo__tile--one">First in DOM</button>
+              <button type="button" class="order-demo__tile order-demo__tile--two">Second in DOM</button>
+              <button type="button" class="order-demo__tile order-demo__tile--three">Third in DOM</button>
+            </div>
+          </div>
+          <div class="focus-lab__example">
+            <span class="focus-lab__tag">VERSION B / ALIGNED ORDER</span>
+            <div class="order-demo" data-focus-scope="aligned">
+              <button type="button" class="order-demo__tile">First in DOM</button>
+              <button type="button" class="order-demo__tile">Second in DOM</button>
+              <button type="button" class="order-demo__tile">Third in DOM</button>
+            </div>
+          </div>
+        </div>
+        <p class="focus-lab__note">The focus-order overlay also numbers the active controls in the comparison above. It uses the DOM's usual sequential order for this demo; it is not a full browser tab-order audit (e.g., positive tabindex, shadow DOM, or nested browsing contexts).</p>
+      </section>
+
+      <section class="tree-lab" aria-labelledby="tree-heading">
+        <div class="tree-lab__head">
+          <div><p class="eyebrow">03 / SEMANTICS INSPECTOR</p><h3 id="tree-heading">What does the markup communicate?</h3></div>
+          <p>Choose a pattern above, interact with its controls, then compare the roles, accessible names, and states exposed by the markup. Select a row to locate its corresponding element.</p>
+        </div>
+        <div class="tree-lab__actions">
+          <button type="button" class="order-button" id="refresh-tree">Refresh semantic snapshot</button>
+          <span class="tree-lab__status" id="tree-updated" role="status" aria-live="polite">Live snapshot ready</span>
+        </div>
+        <div class="tree-lab__grid">
+          <div class="tree-lab__pane tree-lab__pane--flawed">
+            <h4>Version A <span>Intentionally flawed</span></h4>
+            <ol id="tree-flawed" class="tree-lab__nodes" aria-label="Version A semantic nodes"></ol>
+          </div>
+          <div class="tree-lab__pane tree-lab__pane--improved">
+            <h4>Version B <span>Improved</span></h4>
+            <ol id="tree-improved" class="tree-lab__nodes" aria-label="Version B semantic nodes"></ol>
+          </div>
+        </div>
+        <p class="tree-lab__note"><strong>Educational DOM-based model, not the browser's accessibility tree.</strong> Roles and names here are inferred for selected elements, with a deliberately limited set of naming rules. Real accessibility trees may flatten nodes, compute names differently, or vary by browser and assistive technology. Inspect the Accessibility panel in DevTools for actual exposed semantics.</p>
+      </section>
+
+      <aside class="inspector" aria-labelledby="inspector-title">
+        <div class="inspector__head"><div><p class="eyebrow">04 / ENGINEERING NOTES</p><h3 id="inspector-title">Under the hood</h3></div><span class="inspector__label" id="inspector-label">DIALOG</span></div>
+        <div class="inspector__grid">
+          <div><h4>Where version A falls short</h4><ul id="flaws-list"></ul></div>
+          <div><h4>What version B changes</h4><ul id="improvements-list"></ul></div>
+        </div>
+        <pre class="inspector__code"><code id="inspector-code"></code></pre>
+        <button type="button" class="text-button" id="copy-code">Copy example code <span aria-hidden="true">↗</span></button>
+        <span id="copy-feedback" class="sr-only" role="status"></span>
+      </aside>
+    </section>
+
+    <section class="notes" aria-labelledby="notes-title">
+      <div><p class="eyebrow">05 / THE IMPORTANT BIT</p><h2 id="notes-title">Accessibility isn't a filter.</h2></div>
+      <div><p>These examples intentionally isolate a few common problems. They are teaching demos, not automated WCAG audits or accurate simulations of particular disabilities or assistive technologies.</p><p>Test actual projects with keyboard-only navigation, browser zoom, screen readers, and the accessibility tree. Check contrast and motion preferences as part of the broader testing process.</p><a href="https://www.w3.org/WAI/tutorials/" target="_blank" rel="noopener noreferrer">W3C Web Accessibility Tutorials <span aria-hidden="true">↗</span></a></div>
+    </section>
+  </main>
+  <footer class="site-footer wrap"><span>CLAIR SMITH / INTERFACE LAB</span><a href="../../">← Back to portfolio</a></footer>
+</body>
+</html>
