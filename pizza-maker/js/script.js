@@ -660,6 +660,10 @@ export function init(data) {
     requestAnimationFrame(() => {
       nameForm.classList.add("is-complete");
       pizzaName.classList.add("is-visible");
+
+      setTimeout(() => {
+        pizzaName.classList.add("is-finished");
+      }, 500);
     });
 
     nameForm.addEventListener(

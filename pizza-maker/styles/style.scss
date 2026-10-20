@@ -1,9 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@100;600;700&family=Lilita+One&family=Nunito+Sans:wght@400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@100;600;700&family=Nunito+Sans:wght@400;600&family=Righteous&display=swap");
 
 :root {
   // fonts
   --font-label: "Barlow Condensed", sans-serif;
-  --font-heading: "Lilita One", sans-serif;
+  --font-heading: "Righteous", sans-serif;
   --font-body: "Nunito Sans", sans-serif;
 
   // colors
@@ -17,6 +17,24 @@
   --extras: #37837f;
   --color-text: #1f2924;
   --color-text-inverse: #f3eadc;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  min-height: 100dvh;
 }
 
 nav,
@@ -55,36 +73,54 @@ p {
 .pizza-builder {
   width: 100%;
   max-width: 1000px;
+  height: 100vh;
+  height: 100dvh;
   margin: 0 auto;
+  padding: 1rem;
+  overflow: hidden;
 
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 32%) minmax(0, 1fr);
   gap: 1rem;
 
-  // Mobile: everything stacked
-  &--navigation,
+  &--navigation {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
   &--play-surface,
-  &--table,
   &--done {
     grid-column: 1;
+    grid-row: 2;
+    min-height: 0;
+    min-width: 0;
+    overflow-y: auto;
+  }
+
+  &--table {
+    grid-column: 1;
+    grid-row: 3;
   }
 
   @media (min-width: 768px) {
-    // Desktop: 30 / 70 split
-    grid-template-columns: 3fr 7fr;
-    align-items: start;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 7fr);
+    grid-template-rows: auto minmax(0, 1fr);
 
-    &--navigation,
-    &--done {
+    &--navigation {
       grid-column: 1 / -1;
+      grid-row: 1;
     }
 
-    &--play-surface {
+    &--play-surface,
+    &--done {
       grid-column: 1;
+      grid-row: 2;
     }
 
     &--table {
       grid-column: 2;
+      grid-row: 2;
     }
   }
 
@@ -790,6 +826,7 @@ p {
     position: absolute;
     z-index: 2;
     margin: 0;
+    font-family: var(--font-heading);
 
     white-space: nowrap;
     pointer-events: none;
@@ -821,7 +858,8 @@ p {
 
     &.is-finished {
       font-family: var(--font-heading);
-      font-size: 2.8rem;
+      font-size: clamp(1.5rem, 5vw, 3rem);
+      transform: translateY(-1rem);
       font-weight: 400;
       line-height: 1;
       letter-spacing: 2px;
@@ -881,7 +919,7 @@ p {
 
     padding: 0.75rem;
 
-    font-family: var(--font-body);
+    font-family: var(--font-heading);
     font-size: 1rem;
 
     border: 1px solid #cbc1aa;
