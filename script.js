@@ -43,3 +43,20 @@ function revealResumeHash() {
 
 revealResumeHash();
 window.addEventListener("hashchange", revealResumeHash);
+
+// Progressive enhancement: filter the technical inventory without affecting core skills.
+const skillFilters = [...document.querySelectorAll('[data-skill-filter]')];
+const skillModules = [...document.querySelectorAll('[data-skill-category]')];
+skillFilters.forEach(button => {
+  button.addEventListener('click', () => {
+    const category = button.dataset.skillFilter;
+    skillFilters.forEach(filter => {
+      const selected = filter === button;
+      filter.setAttribute('aria-pressed', String(selected));
+      filter.classList.toggle('is-active', selected);
+    });
+    skillModules.forEach(module => {
+      module.hidden = category !== 'all' && module.dataset.skillCategory !== category;
+    });
+  });
+});
