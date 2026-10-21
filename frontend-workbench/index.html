@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Frontend Workbench: nine developer tools for responsive layouts, accessible interactions, image loading, and performance.">
+  <meta name="theme-color" content="#0b1b24">
+  <title>Frontend Workbench · Clair Smith</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to tools</a>
+  <div class="shell">
+    <header class="site-header">
+      <a class="brand" href="../" aria-label="Return to portfolio">cs<span>.</span> <span class="brand__caption">/ PORTFOLIO</span></a>
+      <a class="header-link" href="../interface-lab/">Interface Lab <span aria-hidden="true">↗</span></a>
+    </header>
+    <main id="main">
+      <section class="hero" aria-labelledby="page-title">
+        <div class="eyebrow"><span class="status-dot" aria-hidden="true"></span> PROJECT 004 / DEVELOPER UTILITIES</div>
+        <h1 id="page-title">Frontend <em>Workbench.</em></h1>
+        <p>Small, useful tools for the details that make interfaces work. Tweak the values, test the behaviors, and take the code.</p>
+        <div class="hero__meta"><span>VANILLA JS</span><span>SEMANTIC HTML</span><span>RESPONSIVE CSS</span><span>NO BUILD REQUIRED</span></div>
+      </section>
+      <div class="workspace">
+        <aside class="sidebar" aria-label="Workbench tools">
+          <div class="sidebar__caption">TOOL DIRECTORY <span>09 / 09</span></div>
+          <nav class="tool-nav" aria-label="Select a tool">
+            <div class="nav-category">01 / DESIGN & CSS</div>
+            <button class="tool-nav__item is-active" data-tool-target="type" aria-controls="tool-type" aria-current="true"><span>01</span><strong>Fluid Type Studio</strong><small>CSS / clamp()</small></button>
+            <button class="tool-nav__item" data-tool-target="layout" aria-controls="tool-layout"><span>02</span><strong>CSS Layout Playground</strong><small>GRID / FLEX</small></button>
+            <button class="tool-nav__item" data-tool-target="color" aria-controls="tool-color"><span>03</span><strong>Accessible Color Studio</strong><small>WCAG / CONTRAST</small></button>
+            <button class="tool-nav__item" data-tool-target="motion" aria-controls="tool-motion"><span>04</span><strong>Animation Timing Studio</strong><small>EASING / MOTION</small></button>
+            <div class="nav-category">02 / ACCESSIBILITY</div>
+            <button class="tool-nav__item" data-tool-target="aria" aria-controls="tool-aria"><span>05</span><strong>ARIA State Tester</strong><small>STATE / SEMANTICS</small></button>
+            <button class="tool-nav__item" data-tool-target="focus" aria-controls="tool-focus"><span>06</span><strong>Focus Inspector</strong><small>KEYBOARD / ORDER</small></button>
+            <button class="tool-nav__item" data-tool-target="semantic" aria-controls="tool-semantic"><span>07</span><strong>Semantic HTML Explorer</strong><small>NATIVE / ARIA</small></button>
+            <div class="nav-category">03 / PERFORMANCE</div>
+            <button class="tool-nav__item" data-tool-target="budget" aria-controls="tool-budget"><span>08</span><strong>Performance Budget</strong><small>RESOURCES / LIMITS</small></button>
+            <button class="tool-nav__item" data-tool-target="images" aria-controls="tool-images"><span>09</span><strong>Image Optimization Advisor</strong><small>RESPONSIVE / LCP</small></button>
+          </nav>
+          <p class="sidebar__note">Built for exploration. Results remain in your browser; nothing is uploaded.</p>
+        </aside>
+        <div class="tool-content">
+          <section id="tool-type" class="tool-panel" data-tool="type" aria-labelledby="type-title">
+            <div class="tool-heading"><div><div class="eyebrow">TOOL 01 / CSS GENERATOR</div><h2 id="type-title">Fluid Type <em>Studio</em></h2><p>Generate a responsive font size that scales between two viewport widths, with a readable fallback.</p></div><span class="tool-heading__mark" aria-hidden="true">Aa</span></div>
+            <div class="input-grid">
+              <label>Minimum size <span>rem</span><input id="type-min" type="number" min="0.5" max="8" step="0.125" value="1.25"></label>
+              <label>Maximum size <span>rem</span><input id="type-max" type="number" min="0.5" max="12" step="0.125" value="3.5"></label>
+              <label>Minimum viewport <span>px</span><input id="view-min" type="number" min="240" max="3000" step="10" value="360"></label>
+              <label>Maximum viewport <span>px</span><input id="view-max" type="number" min="240" max="4000" step="10" value="1440"></label>
+            </div>
+            <div class="preview-head"><span>LIVE PREVIEW</span><output id="type-measured" for="type-min type-max view-min view-max">—</output></div>
+            <div class="type-preview"><p id="type-preview-text">Design that adapts.</p><p class="type-preview__note">Preview width is adjustable; the simulated viewport determines the computed size.</p></div>
+            <label class="range-label" for="type-viewport">Simulated viewport <output id="type-view-label">900 px</output></label>
+            <input type="range" id="type-viewport" min="360" max="1440" step="10" value="900">
+            <div class="code-head"><span>GENERATED CSS</span><button class="copy-btn" data-copy="type-code">Copy CSS <span aria-hidden="true">↗</span></button></div>
+            <pre class="code-output"><code id="type-code"></code></pre>
+            <p class="message" id="type-error" role="status"></p>
+            <p class="footnote">Assumes a 16px root font size for converting pixels to rem. The output is a real <code>clamp()</code> expression; change that assumption in the code if your root size differs.</p>
+          </section>
+          <section id="tool-aria" class="tool-panel" data-tool="aria" aria-labelledby="aria-title" hidden>
+            <div class="tool-heading"><div><div class="eyebrow">TOOL 02 / INTERACTION STATES</div><h2 id="aria-title">ARIA State <em>Tester</em></h2><p>See how accessible state attributes track the behavior of a disclosure, live announcement, and selectable tabs.</p></div><span class="tool-heading__mark" aria-hidden="true">{ }</span></div>
+            <div class="state-demo"><div class="preview-head"><span>DISCLOSURE / EXPANDED STATE</span><output id="expanded-state">aria-expanded="false"</output></div><button class="demo-disclosure" id="disclosure-toggle" aria-expanded="false" aria-controls="disclosure-content">Shipping details <span aria-hidden="true">＋</span></button><div id="disclosure-content" class="disclosure-content" hidden><p>Shipping usually takes 2–4 business days. This content is available only while expanded.</p></div></div>
+            <div class="state-demo"><div class="preview-head"><span>LIVE REGION / STATUS</span><span>POLITE</span></div><button class="button button--outline" id="announce-button">Run example search</button><p id="aria-announcement" class="announcement" role="status" aria-live="polite" aria-atomic="true">No search performed yet.</p></div>
+            <div class="state-demo"><div class="preview-head"><span>TABS / SELECTED STATE</span><output id="selected-state">aria-selected="true"</output></div><div class="demo-tabs" role="tablist" aria-label="Sample content views"><button id="tab-overview" role="tab" aria-selected="true" tabindex="0" aria-controls="panel-overview">Overview</button><button id="tab-details" role="tab" aria-selected="false" tabindex="-1" aria-controls="panel-details">Details</button></div><div id="panel-overview" role="tabpanel" aria-labelledby="tab-overview" tabindex="0" class="tab-panel">Overview content is visible and connected to the selected tab.</div><div id="panel-details" role="tabpanel" aria-labelledby="tab-details" tabindex="0" class="tab-panel" hidden>Details content is visible; the other tab panel is hidden.</div></div>
+            <div class="code-head"><span>STATE SNAPSHOT</span><button class="copy-btn" data-copy="aria-code">Copy markup <span aria-hidden="true">↗</span></button></div><pre class="code-output"><code id="aria-code"></code></pre>
+            <p class="footnote">These are isolated educational controls. Semantic HTML, keyboard behavior, focus management, and meaningful announcements matter more than adding ARIA attributes alone.</p>
+          </section>
+          <section id="tool-budget" class="tool-panel" data-tool="budget" aria-labelledby="budget-title" hidden>
+            <div class="tool-heading"><div><div class="eyebrow">TOOL 03 / PLANNING CALCULATOR</div><h2 id="budget-title">Performance <em>Budget</em></h2><p>Compare manually entered transfer sizes against a configurable page-weight budget.</p></div><span class="tool-heading__mark" aria-hidden="true">KB</span></div>
+            <div class="input-grid budget-grid">
+              <label>Images <span>KB</span><input id="budget-images" type="number" min="0" max="999999" value="900"></label>
+              <label>JavaScript <span>KB</span><input id="budget-js" type="number" min="0" max="999999" value="300"></label>
+              <label>CSS <span>KB</span><input id="budget-css" type="number" min="0" max="999999" value="80"></label>
+              <label>Other assets <span>KB</span><input id="budget-other" type="number" min="0" max="999999" value="120"></label>
+              <label class="budget-grid__limit">Total budget <span>KB</span><input id="budget-limit" type="number" min="1" max="9999999" value="1500"></label>
+            </div>
+            <div class="budget-summary"><div><span>ENTERED TRANSFER SIZE</span><strong id="budget-total">—</strong></div><div><span>REMAINING / OVER</span><strong id="budget-difference">—</strong></div><div><span>STATUS</span><strong id="budget-status">—</strong></div></div>
+            <div class="budget-bar" role="img" id="budget-bar-label" aria-label="Resource composition versus budget"><span id="bar-images" class="budget-bar__segment budget-bar__segment--images"></span><span id="bar-js" class="budget-bar__segment budget-bar__segment--js"></span><span id="bar-css" class="budget-bar__segment budget-bar__segment--css"></span><span id="bar-other" class="budget-bar__segment budget-bar__segment--other"></span></div>
+            <div class="budget-legend"><span><i class="swatch swatch--images"></i>Images</span><span><i class="swatch swatch--js"></i>JavaScript</span><span><i class="swatch swatch--css"></i>CSS</span><span><i class="swatch swatch--other"></i>Other</span></div>
+            <div class="code-head"><span>BUDGET SNAPSHOT</span><button class="copy-btn" data-copy="budget-code">Copy summary <span aria-hidden="true">↗</span></button></div><pre class="code-output"><code id="budget-code"></code></pre>
+            <p class="footnote">These are planning figures, not measured network transfers or CWV scores. Get actual transferred bytes from DevTools Network or a build report and enter them here. Page weight alone does not determine LCP, INP, or CLS.</p>
+          </section>
+          <section id="tool-focus" class="tool-panel" data-tool="focus" aria-labelledby="focus-title" hidden>
+            <div class="tool-heading"><div><div class="eyebrow">TOOL 04 / KEYBOARD EXPLORER</div><h2 id="focus-title">Focus <em>Inspector</em></h2><p>Explore tab sequence, visible focus, and semantic controls inside a safe, self-contained demo.</p></div><span class="tool-heading__mark" aria-hidden="true">⌁</span></div>
+            <div class="focus-intro"><p>Press <kbd>Tab</kbd> to move through the controls, or choose <strong>Step through</strong> to focus them in DOM order.</p><button id="focus-next" class="button">Step through <span aria-hidden="true">→</span></button><button id="focus-reset" class="button button--outline">Reset</button></div>
+            <div class="focus-sandbox" id="focus-sandbox" aria-label="Keyboard focus demonstration"><label for="demo-name">Display name</label><input data-focus-item id="demo-name" type="text" placeholder="Your name"><label for="demo-topic">Topic</label><select id="demo-topic" data-focus-item><option>Accessibility</option><option>Performance</option><option>CSS architecture</option></select><label class="check-row"><input type="checkbox" data-focus-item id="demo-check"> Send me updates</label><div class="focus-sandbox__actions"><button type="button" data-focus-item class="button">Save preferences</button><a href="#focus-details" data-focus-item>Read details ↗</a></div><p id="focus-details">A demonstration of native, keyboard-reachable controls.</p></div>
+            <div class="focus-readout"><span>FOCUSED ELEMENT</span><output id="focus-current" aria-live="polite" aria-atomic="true">None in demo</output></div>
+            <ol class="focus-list" id="focus-list" aria-label="Focus order"></ol>
+            <p class="footnote">This inspector intentionally examines only its own demo—not third-party pages or your entire portfolio. Real-world focus audits should also test visibility, meaningful order, modal behavior, and assistive technology.</p>
+          </section>
+
+          <section id="tool-layout" class="tool-panel" data-tool="layout" aria-labelledby="layout-title" hidden>
+            <div class="tool-heading"><div><div class="eyebrow">TOOL 02 / LAYOUT ENGINE</div><h2 id="layout-title">CSS Layout <em>Playground</em></h2><p>Switch between Grid and Flexbox, modify sizing and alignment, and inspect the live layout.</p></div><span class="tool-heading__mark" aria-hidden="true">▦</span></div>
+            <div class="input-grid">
+              <label>Layout mode<select id="layout-mode"><option value="grid">Grid</option><option value="flex">Flexbox</option></select></label>
+              <label>Columns / basis<input id="layout-columns" type="number" min="1" max="6" value="3"></label>
+              <label>Gap <span>px</span><input id="layout-gap" type="number" min="0" max="64" value="16"></label>
+              <label>Alignment<select id="layout-align"><option value="stretch">Stretch</option><option value="start">Start</option><option value="center">Center</option><option value="end">End</option></select></label>
+            </div>
+            <div class="preview-head"><span>RESPONSIVE PREVIEW</span><output id="layout-width-out">680px</output></div>
+            <div class="layout-viewport" id="layout-viewport"><div class="layout-items" id="layout-items"><div>01</div><div>02</div><div>03</div><div>04</div><div>05</div><div>06</div></div></div>
+            <label class="range-label" for="layout-width">Preview width<input id="layout-width" type="range" min="280" max="760" value="680" step="20"></label>
+            <div class="code-head"><span>GENERATED CSS</span><button class="copy-btn" data-copy="layout-code">Copy CSS ↗</button></div><pre class="code-output"><code id="layout-code"></code></pre>
+            <p class="footnote">Grid uses auto-fitting minimum-width tracks for narrow viewports. Flexbox wraps as available space changes.</p>
+          </section>
+          <section id="tool-color" class="tool-panel" data-tool="color" aria-labelledby="color-title" hidden>
+            <div class="tool-heading"><div><div class="eyebrow">TOOL 03 / ACCESSIBLE COLOR</div><h2 id="color-title">Accessible Color <em>Studio</em></h2><p>Compute WCAG contrast ratios and test readable combinations on sample interface text.</p></div><span class="tool-heading__mark" aria-hidden="true">◒</span></div>
+            <div class="input-grid"><label>Foreground<input type="color" id="color-fg" value="#f4f5ed"></label><label>Background<input type="color" id="color-bg" value="#16343d"></label><label>Foreground hex<input id="color-fg-hex" type="text" value="#f4f5ed" maxlength="7" spellcheck="false"></label><label>Background hex<input id="color-bg-hex" type="text" value="#16343d" maxlength="7" spellcheck="false"></label></div>
+            <div class="color-swatch" id="color-preview"><strong>Readable by design.</strong><span>Body text, interface labels and content should be understandable against their backgrounds.</span><button id="color-example" type="button">Example control</button></div>
+            <div class="contrast-results"><div><span>CONTRAST RATIO</span><strong id="color-ratio">—</strong></div><div><span>NORMAL TEXT AA / AAA</span><strong id="color-normal">—</strong></div><div><span>LARGE TEXT AA / AAA</span><strong id="color-large">—</strong></div></div>
+            <p class="message" id="color-error" role="status"></p><div class="code-head"><span>GENERATED CSS TOKENS</span><button class="copy-btn" data-copy="color-code">Copy CSS ↗</button></div><pre class="code-output"><code id="color-code"></code></pre>
+            <p class="footnote">WCAG 2.1 contrast thresholds: normal text 4.5:1 (AA) / 7:1 (AAA); large text 3:1 (AA) / 4.5:1 (AAA). Contrast alone does not guarantee full accessibility.</p>
+          </section>
+          <section id="tool-motion" class="tool-panel" data-tool="motion" aria-labelledby="motion-title" hidden>
+            <div class="tool-heading"><div><div class="eyebrow">TOOL 04 / MOTION DESIGN</div><h2 id="motion-title">Animation Timing <em>Studio</em></h2><p>Compare easing curves, replay transitions, and generate motion-aware CSS.</p></div><span class="tool-heading__mark" aria-hidden="true">↝</span></div>
+            <div class="input-grid"><label>Easing<select id="motion-ease"><option value="ease">ease</option><option value="ease-in-out">ease-in-out</option><option value="linear">linear</option><option value="custom">custom cubic-bezier</option></select></label><label>Duration <span>ms</span><input type="number" id="motion-duration" min="100" max="4000" value="650" step="50"></label><label>Delay <span>ms</span><input type="number" id="motion-delay" min="0" max="2000" value="0" step="50"></label><label>Bezier controls<select id="motion-curve"><option value="0.22, 1, 0.36, 1">Soft landing</option><option value="0.68, -0.4, 0.27, 1.4">Overshoot</option><option value="0.4, 0, 0.2, 1">Material</option></select></label></div>
+            <label class="check-row"><input id="motion-reduce" type="checkbox"> Preview reduced-motion alternative</label>
+            <div class="motion-preview"><div class="motion-track"><span>ELEMENT A</span><div id="motion-object" class="motion-object"></div></div><div class="motion-track"><span>LINEAR REFERENCE</span><div id="motion-reference" class="motion-object motion-object--reference"></div></div></div>
+            <button id="motion-play" type="button" class="button">Replay animation ↗</button>
+            <div class="code-head"><span>GENERATED CSS</span><button class="copy-btn" data-copy="motion-code">Copy CSS ↗</button></div><pre class="code-output"><code id="motion-code"></code></pre><p class="footnote">Reduced-motion preview removes the spatial movement. The generated CSS also respects the user's operating-system preference.</p>
+          </section>
+          <section id="tool-semantic" class="tool-panel" data-tool="semantic" aria-labelledby="semantic-title" hidden>
+            <div class="tool-heading"><div><div class="eyebrow">TOOL 07 / HTML PATTERNS</div><h2 id="semantic-title">Semantic HTML <em>Explorer</em></h2><p>Compare robust native HTML patterns with common anti-patterns and explore their expected behavior.</p></div><span class="tool-heading__mark" aria-hidden="true">&lt;/&gt;</span></div>
+            <label class="select-label" for="semantic-pattern">Choose a pattern<select id="semantic-pattern"><option value="button">Action button</option><option value="nav">Navigation links</option><option value="disclosure">Disclosure</option><option value="form">Labeled input</option><option value="dialog">Modal dialog</option></select></label>
+            <div class="semantic-comparison"><div><div class="preview-head"><span>ANTI-PATTERN</span></div><pre class="code-output"><code id="semantic-bad"></code></pre></div><div><div class="preview-head"><span>ACCESSIBLE BASELINE</span><pre></pre></div><pre class="code-output"><code id="semantic-good"></code></pre></div></div>
+            <div class="state-demo"><div class="preview-head"><span>INTERACTIVE NATIVE PATTERN</span></div><div id="semantic-live"></div></div>
+            <p id="semantic-explain" class="footnote"></p><div class="code-head"><span>PRODUCTION STARTING POINT</span><button class="copy-btn" data-copy="semantic-good">Copy markup ↗</button></div>
+            <p class="footnote">Code snippets are independently written educational examples. Real components also require context-dependent labeling, behavior, and testing.</p>
+          </section>
+          <section id="tool-images" class="tool-panel" data-tool="images" aria-labelledby="images-title" hidden>
+            <div class="tool-heading"><div><div class="eyebrow">TOOL 09 / IMAGE DELIVERY</div><h2 id="images-title">Image Optimization <em>Advisor</em></h2><p>Generate responsive-image markup tailored to an image's place in the page.</p></div><span class="tool-heading__mark" aria-hidden="true">▧</span></div>
+            <div class="input-grid"><label>Use case<select id="image-purpose"><option value="hero">Above-the-fold hero</option><option value="content">In-content illustration</option><option value="thumb">Thumbnail / grid card</option></select></label><label>Source width <span>px</span><input id="image-width" type="number" min="200" max="8000" value="2400"></label><label>Source height <span>px</span><input id="image-height" type="number" min="100" max="8000" value="1350"></label><label>Layout max width <span>px</span><input id="image-display" type="number" min="100" max="3000" value="1200"></label></div>
+            <label class="select-label" for="image-path">File basename (no extension)<input id="image-path" type="text" value="hero-landscape" maxlength="80" spellcheck="false"></label>
+            <div class="image-advice"><strong id="image-advice-title">—</strong><p id="image-advice-text"></p></div><p id="image-error" class="message" role="status"></p>
+            <div class="code-head"><span>RESPONSIVE MARKUP</span><button class="copy-btn" data-copy="image-code">Copy HTML ↗</button></div><pre class="code-output"><code id="image-code"></code></pre>
+            <p class="footnote">Replace the example filenames with real generated image variants. This advisor doesn't resize, encode, inspect, or optimize image files. Validate final loading behavior in DevTools and real-user performance data.</p>
+          </section>
+        </div>
+      </div>
+      <section class="end-note"><div class="eyebrow">ENGINEERING NOTE / 001</div><h2>Good interfaces are built in the details.</h2><p>These tools reflect the same approach I bring to frontend development: make the behavior visible, test the assumptions, and leave the interface better than you found it.</p><a href="../writing/making-performance-a-practice/">Read the performance case study <span aria-hidden="true">↗</span></a></section>
+    </main>
+    <footer><span>CLAIR SMITH / FRONTEND WORKBENCH</span><a href="../">← RETURN TO PORTFOLIO</a></footer>
+  </div>
+</body>
+</html>
