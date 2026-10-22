@@ -1,35 +1,36 @@
 <!doctype html>
+
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@100;400&family=Inter:wght@300;400&family=Space+Grotesk:wght@300;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@100;400&amp;family=Inter:wght@300;400&amp;family=Space+Grotesk:wght@300;600&amp;display=swap"
       rel="stylesheet"
     />
     <meta
-      name="description"
       content="Clair Smith — senior frontend engineer specializing in accessible, high-performance, thoughtful web experiences."
+      name="description"
     />
-    <meta name="theme-color" content="#f6f5f0" />
+    <meta content="#f6f5f0" name="theme-color" />
     <title>Clair Smith — Frontend Engineer</title>
-
-    <link rel="stylesheet" href="styles.min.css" />
-    <link rel="stylesheet" href="project-showcase.css" />
+    <link href="styles.min.css" rel="stylesheet" />
+    <link href="project-showcase.css" rel="stylesheet" />
+    <link href="field-notes.css" rel="stylesheet" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <div class="site-shell">
       <header class="site-header">
         <a
+          aria-label="Clair Smith, top of page"
           class="site-header__brand"
           href="#top"
-          aria-label="Clair Smith, top of page"
         >
-          <span class="site-header__mark" aria-hidden="true"
-            ><img src="./logo.png" alt="" width="48" height="48"
+          <span aria-hidden="true" class="site-header__mark">
+            <img src="./logo.png" alt="" width="48" height="48"
           /></span>
           <span class="site-header__brand-label"
             >CLAIR SMITH
@@ -37,8 +38,9 @@
             ENGINEER</span
           >
         </a>
-        <nav class="site-nav" aria-label="Primary">
+        <nav aria-label="Primary" class="site-nav">
           <a href="#work">Work</a>
+          <a href="#field-notes">Writing</a>
           <a href="#about">About</a>
           <a href="#experience">Experience</a>
           <a class="site-nav__contact" href="mailto:clair.frontend@gmail.com"
@@ -46,11 +48,10 @@
           >
         </nav>
       </header>
-
       <main id="main">
-        <section class="hero" id="top" aria-labelledby="hero-title">
+        <section aria-labelledby="hero-title" class="hero" id="top">
           <div class="hero__eyebrow">
-            <span class="signal" aria-hidden="true"></span> FRONTEND ENGINEERING
+            <span aria-hidden="true" class="signal"></span> FRONTEND ENGINEERING
             <span aria-hidden="true">/</span> AUSTIN, TX
           </div>
           <div class="hero__layout">
@@ -65,15 +66,15 @@
                 built to last.
               </p>
               <div class="hero__actions">
-                <a href="#work" class="action action--primary"
+                <a class="action action--primary" href="#work"
                   >Explore selected work <span aria-hidden="true">↘</span></a
                 >
-                <a href="#about" class="action action--text"
+                <a class="action action--text" href="#about"
                   >More about me <span aria-hidden="true">↗</span></a
                 >
               </div>
             </div>
-            <aside class="hero__aside" aria-label="Areas of focus">
+            <aside aria-label="Areas of focus" class="hero__aside">
               <span class="micro-label">WHAT I BRING TO THE TABLE</span>
               <div class="hero__aside-line">
                 <span>01</span><strong>Accessible by design</strong>
@@ -84,9 +85,8 @@
               <div class="hero__aside-line">
                 <span>03</span><strong>Interface obsessed</strong>
               </div>
-              <div class="hero__index" aria-hidden="true">
-                &lt;html&gt;<br />&nbsp;&nbsp;with intention<span class="caret"
-                  >_</span
+              <div aria-hidden="true" class="hero__index">
+                &lt;html&gt;<br />  with intention<span class="caret">_</span
                 ><br />&lt;/html&gt;
               </div>
             </aside>
@@ -96,8 +96,7 @@
             ><span>DESIGN × ENGINEERING</span>
           </div>
         </section>
-
-        <section class="showcase" id="work" aria-labelledby="work-title">
+        <section aria-labelledby="work-title" class="showcase" id="work">
           <div class="section-head work-directory__head">
             <div>
               <span class="micro-label">01 / SELECTED WORK — SIX PROJECTS</span>
@@ -116,14 +115,14 @@
           <div class="work-directory">
             <article class="work-tile work-tile--lab">
               <a
+                aria-label="Explore Interface Lab"
                 class="work-tile__link"
                 href="./interface-lab/"
-                aria-label="Explore Interface Lab"
                 ><div class="work-tile__visual">
                   <div class="work-tile__visual-top">
                     <span>01 / STUDY</span><span>↗</span>
                   </div>
-                  <div class="work-tile__art" aria-hidden="true">
+                  <div aria-hidden="true" class="work-tile__art">
                     <span class="work-tile__hero-type"
                       >{ interface<span>_</span>lab }</span
                     >
@@ -149,14 +148,14 @@
             </article>
             <article class="work-tile work-tile--pizza">
               <a
+                aria-label="Explore Pizza Builder"
                 class="work-tile__link"
                 href="./pizza-maker/"
-                aria-label="Explore Pizza Builder"
                 ><div class="work-tile__visual">
                   <div class="work-tile__visual-top">
                     <span>02 / STUDY</span><span>↗</span>
                   </div>
-                  <div class="work-tile__art" aria-hidden="true">
+                  <div aria-hidden="true" class="work-tile__art">
                     <span class="work-tile__pizza">● ● ●</span>
                   </div>
                   <div class="work-tile__visual-bottom">
@@ -179,24 +178,24 @@
             </article>
             <article class="work-tile work-tile--cards">
               <a
+                aria-label="Explore Card Experiments"
                 class="work-tile__link"
                 href="./card-experiments/"
-                aria-label="Explore Card Experiments"
                 ><div class="work-tile__visual">
                   <div class="work-tile__visual-top">
                     <span>03 / STUDY</span><span>↗</span>
                   </div>
-                  <div class="work-tile__art" aria-hidden="true">
+                  <div aria-hidden="true" class="work-tile__art">
                     <span class="work-tile__stack"
                       ><i></i><i></i><strong>UI</strong></span
                     >
                   </div>
                   <div class="work-tile__visual-bottom">
-                    MOTION & INTERACTION
+                    MOTION &amp; INTERACTION
                   </div>
                 </div>
                 <div class="work-tile__body">
-                  <span class="work-tile__kind">MOTION & INTERACTION</span>
+                  <span class="work-tile__kind">MOTION &amp; INTERACTION</span>
                   <h3>Card Experiments <span aria-hidden="true">↗</span></h3>
                   <p>
                     Four modes—hover, 3D tilt, flip, and stack—exploring
@@ -211,14 +210,14 @@
             </article>
             <article class="work-tile work-tile--workbench">
               <a
+                aria-label="Explore Frontend Workbench"
                 class="work-tile__link"
                 href="./frontend-workbench/"
-                aria-label="Explore Frontend Workbench"
                 ><div class="work-tile__visual">
                   <div class="work-tile__visual-top">
                     <span>04 / STUDY</span><span>↗</span>
                   </div>
-                  <div class="work-tile__art" aria-hidden="true">
+                  <div aria-hidden="true" class="work-tile__art">
                     <span class="work-tile__terminal"
                       >$ npm run ideas<br /><strong
                         >clamp(1rem, 2vw, 2rem)</strong
@@ -246,14 +245,14 @@
             </article>
             <article class="work-tile work-tile--components">
               <a
+                aria-label="Explore Component Systems Lab"
                 class="work-tile__link"
                 href="./component-systems-lab/"
-                aria-label="Explore Component Systems Lab"
                 ><div class="work-tile__visual">
                   <div class="work-tile__visual-top">
                     <span>05 / STUDY</span><span>↗</span>
                   </div>
-                  <div class="work-tile__art" aria-hidden="true">
+                  <div aria-hidden="true" class="work-tile__art">
                     <span class="work-tile__tokens"
                       ><b>design.tokens</b><span><i></i><i></i><i></i></span
                       ><small>radius / spacing / color</small></span
@@ -281,24 +280,24 @@
             </article>
             <article class="work-tile work-tile--data">
               <a
+                aria-label="Explore Data Playground"
                 class="work-tile__link"
                 href="./data-playground/"
-                aria-label="Explore Data Playground"
                 ><div class="work-tile__visual">
                   <div class="work-tile__visual-top">
                     <span>06 / STUDY</span><span>↗</span>
                   </div>
-                  <div class="work-tile__art" aria-hidden="true">
+                  <div aria-hidden="true" class="work-tile__art">
                     <span class="work-tile__bars"
                       ><i></i><i></i><i></i><i></i><i></i><i></i
                     ></span>
                   </div>
                   <div class="work-tile__visual-bottom">
-                    DATA & VISUALIZATION
+                    DATA &amp; VISUALIZATION
                   </div>
                 </div>
                 <div class="work-tile__body">
-                  <span class="work-tile__kind">DATA & VISUALIZATION</span>
+                  <span class="work-tile__kind">DATA &amp; VISUALIZATION</span>
                   <h3>Data Playground <span aria-hidden="true">↗</span></h3>
                   <p>
                     Explore, filter, chart, import, and export synthetic records
@@ -318,9 +317,9 @@
           </p>
         </section>
         <section
+          aria-labelledby="performance-title"
           class="performance-feature"
           id="performance"
-          aria-labelledby="performance-title"
         >
           <div class="performance-feature__header">
             <span class="micro-label"
@@ -330,7 +329,6 @@
               >CORE WEB VITALS / ENGINEERING LEADERSHIP</span
             >
           </div>
-
           <div class="performance-feature__intro">
             <h2 id="performance-title">Beyond the <em>green score.</em></h2>
             <p class="performance-feature__lead">
@@ -344,17 +342,16 @@
               in multiple client contracts.
             </p>
           </div>
-
           <div
-            class="performance-feature__cards"
             aria-label="Explore performance work"
+            class="performance-feature__cards"
           >
             <a
               class="performance-feature__card performance-feature__card--story"
               href="./writing/making-performance-a-practice/"
             >
               <span class="performance-feature__card-top">
-                <span class="performance-feature__card-icon" aria-hidden="true"
+                <span aria-hidden="true" class="performance-feature__card-icon"
                   >✳</span
                 >
                 <span class="performance-feature__card-type"
@@ -374,13 +371,12 @@
                 >Read the case study <span aria-hidden="true">↗</span></span
               >
             </a>
-
             <a
               class="performance-feature__card performance-feature__card--lab"
               href="./interface-lab/performance-lab/"
             >
               <span class="performance-feature__card-top">
-                <span class="performance-feature__card-icon" aria-hidden="true"
+                <span aria-hidden="true" class="performance-feature__card-icon"
                   >↗</span
                 >
                 <span class="performance-feature__card-type"
@@ -401,18 +397,16 @@
               >
             </a>
           </div>
-
           <div class="performance-feature__footer">
             <span>ENGINEERING LEADERSHIP</span>
             <span>CORE WEB VITALS</span>
             <span>TECHNICAL SEO</span>
           </div>
         </section>
-
         <section
+          aria-labelledby="accessibility-title"
           class="performance-feature accessibility-feature"
           id="accessibility"
-          aria-labelledby="accessibility-title"
         >
           <div class="performance-feature__header">
             <span class="micro-label"
@@ -438,15 +432,15 @@
             </p>
           </div>
           <div
-            class="performance-feature__cards"
             aria-label="Explore accessibility work"
+            class="performance-feature__cards"
           >
             <a
               class="performance-feature__card performance-feature__card--story"
               href="./writing/beyond-the-accessibility-audit/"
             >
               <span class="performance-feature__card-top">
-                <span class="performance-feature__card-icon" aria-hidden="true"
+                <span aria-hidden="true" class="performance-feature__card-icon"
                   >✳</span
                 >
                 <span class="performance-feature__card-type"
@@ -472,7 +466,7 @@
               href="./interface-lab/accessible-by-design/"
             >
               <span class="performance-feature__card-top">
-                <span class="performance-feature__card-icon" aria-hidden="true"
+                <span aria-hidden="true" class="performance-feature__card-icon"
                   >↗</span
                 >
                 <span class="performance-feature__card-type"
@@ -498,8 +492,70 @@
             ><span>INCLUSIVE INTERFACES</span>
           </div>
         </section>
-
-        <section class="resume-intro" aria-labelledby="resume-intro-title">
+        <section
+          aria-labelledby="field-notes-title"
+          class="field-notes"
+          id="field-notes"
+        >
+          <div class="field-notes__masthead">
+            <span class="micro-label">04 / FIELD NOTES</span
+            ><span>WRITING / ENGINEERING PERSPECTIVES</span>
+          </div>
+          <div class="field-notes__intro">
+            <h2 id="field-notes-title">Thinking out <em>loud.</em></h2>
+            <p>
+              Field notes on frontend engineering, accessibility, performance,
+              and the decisions behind better interfaces.
+            </p>
+          </div>
+          <div class="field-notes__grid">
+            <a
+              class="field-notes__feature"
+              href="./writing/the-trouble-with-aria/"
+              ><span class="field-notes__meta"
+                >FEATURED ARTICLE / 001  ·  ACCESSIBILITY</span
+              ><span class="field-notes__feature-title"
+                >The Trouble <em>With ARIA.</em></span
+              ><span class="field-notes__summary"
+                >More attributes don't make a better interface. Understanding
+                semantics does.</span
+              ><span class="field-notes__cta"
+                >Read the article <span aria-hidden="true">↗</span></span
+              ></a
+            ><a
+              class="field-notes__feature field-notes__feature--ai"
+              href="./writing/not-every-problem-needs-ai/"
+              ><span class="field-notes__meta"
+                >ARTICLE / 002 · ENGINEERING PERSPECTIVE</span
+              ><span class="field-notes__feature-title"
+                >Not Every Problem <em>Needs AI.</em></span
+              ><span class="field-notes__summary"
+                >When adding complexity becomes mistaken for innovation—and why
+                developers still matter.</span
+              ><span class="field-notes__cta">Read the article ↗</span></a
+            >
+            <div class="field-notes__secondary">
+              <a href="./writing/making-performance-a-practice/"
+                ><span class="field-notes__meta">CASE STUDY / PERFORMANCE</span
+                ><strong>Making Performance a Practice.</strong
+                ><span>Building sustainable engineering work across teams.</span
+                ><span class="field-notes__cta">Read case study ↗</span></a
+              ><a href="./writing/beyond-the-accessibility-audit/"
+                ><span class="field-notes__meta"
+                  >CASE STUDY / ACCESSIBILITY</span
+                ><strong>Beyond the Accessibility Audit.</strong
+                ><span
+                  >How testing and review can shift a team toward
+                  prevention.</span
+                ><span class="field-notes__cta">Read case study ↗</span></a
+              >
+            </div>
+          </div>
+          <a class="field-notes__browse" href="./writing/"
+            >Browse all writing <span aria-hidden="true">↗</span></a
+          >
+        </section>
+        <section aria-labelledby="resume-intro-title" class="resume-intro">
           <span class="micro-label">03 / BEYOND THE PIXELS</span>
           <div>
             <h2 id="resume-intro-title">Experience with <em>depth.</em></h2>
@@ -517,13 +573,13 @@
         </section>
         <div class="resume__content" id="resume">
           <!-- SUMMARY -->
-          <section id="about" class="section">
-            <details class="resume-disclosure" open>
+          <section class="section" id="about">
+            <details class="resume-disclosure" open="">
               <summary class="section__title">
                 <span>01 Summary</span
                 ><span
-                  class="resume-disclosure__icon"
                   aria-hidden="true"
+                  class="resume-disclosure__icon"
                 ></span>
               </summary>
               <div class="section__content">
@@ -550,8 +606,8 @@
                     </p>
                   </div>
                   <div
-                    class="profile-summary__capabilities"
                     aria-label="Professional strengths"
+                    class="profile-summary__capabilities"
                   >
                     <div class="profile-summary__capability">
                       <span class="profile-summary__category"
@@ -597,21 +653,20 @@
               </div>
             </details>
           </section>
-
           <!-- SKILLS -->
-          <section id="section--skills" class="section">
+          <section class="section" id="section--skills">
             <details class="resume-disclosure">
               <summary class="section__title">
                 <span>02 Skills</span
                 ><span
-                  class="resume-disclosure__icon"
                   aria-hidden="true"
+                  class="resume-disclosure__icon"
                 ></span>
               </summary>
               <div class="section__content">
                 <div
-                  class="skills-dashboard"
                   aria-label="Engineering expertise and technical toolkit"
+                  class="skills-dashboard"
                 >
                   <div class="skills-dashboard__masthead">
                     <div>
@@ -629,7 +684,7 @@
                         practices.
                       </p>
                     </div>
-                    <span class="skills-dashboard__stamp" aria-hidden="true"
+                    <span aria-hidden="true" class="skills-dashboard__stamp"
                       >SYSTEM / 01<br />ACTIVE MODULES</span
                     >
                   </div>
@@ -691,39 +746,39 @@
                     <span>06 MODULES</span>
                   </div>
                   <div
+                    aria-label="Filter technical inventory"
                     class="skills-dashboard__filters"
                     role="group"
-                    aria-label="Filter technical inventory"
                   >
                     <button
-                      type="button"
+                      aria-pressed="true"
                       class="skills-dashboard__filter is-active"
                       data-skill-filter="all"
-                      aria-pressed="true"
+                      type="button"
                     >
                       All systems
                     </button>
                     <button
-                      type="button"
+                      aria-pressed="false"
                       class="skills-dashboard__filter"
                       data-skill-filter="engineering"
-                      aria-pressed="false"
+                      type="button"
                     >
                       Engineering
                     </button>
                     <button
-                      type="button"
+                      aria-pressed="false"
                       class="skills-dashboard__filter"
                       data-skill-filter="delivery"
-                      aria-pressed="false"
+                      type="button"
                     >
                       Delivery
                     </button>
                     <button
-                      type="button"
+                      aria-pressed="false"
                       class="skills-dashboard__filter"
                       data-skill-filter="strategy"
-                      aria-pressed="false"
+                      type="button"
                     >
                       Strategy
                     </button>
@@ -739,11 +794,11 @@
                       <div class="skills-dashboard__module-heading">
                         <span class="skills-dashboard__index">01 / ENG</span
                         ><span
-                          class="skills-dashboard__node"
                           aria-hidden="true"
+                          class="skills-dashboard__node"
                         ></span>
                       </div>
-                      <h5>Languages & Styling</h5>
+                      <h5>Languages &amp; Styling</h5>
                       <p>
                         JavaScript (ES6+), TypeScript, HTML5, CSS3, Sass / SCSS
                       </p>
@@ -755,11 +810,11 @@
                       <div class="skills-dashboard__module-heading">
                         <span class="skills-dashboard__index">02 / ENG</span
                         ><span
-                          class="skills-dashboard__node"
                           aria-hidden="true"
+                          class="skills-dashboard__node"
                         ></span>
                       </div>
-                      <h5>Frameworks & APIs</h5>
+                      <h5>Frameworks &amp; APIs</h5>
                       <p>
                         React, Next.js, Gatsby, Node.js, REST APIs, GraphQL,
                         Twig
@@ -772,11 +827,11 @@
                       <div class="skills-dashboard__module-heading">
                         <span class="skills-dashboard__index">03 / SYS</span
                         ><span
-                          class="skills-dashboard__node"
                           aria-hidden="true"
+                          class="skills-dashboard__node"
                         ></span>
                       </div>
-                      <h5>Platforms & Delivery</h5>
+                      <h5>Platforms &amp; Delivery</h5>
                       <p>
                         Drupal, WordPress, Storybook, Vite, Webpack, npm,
                         Docker, Lando, DDEV
@@ -789,11 +844,11 @@
                       <div class="skills-dashboard__module-heading">
                         <span class="skills-dashboard__index">04 / SYS</span
                         ><span
-                          class="skills-dashboard__node"
                           aria-hidden="true"
+                          class="skills-dashboard__node"
                         ></span>
                       </div>
-                      <h5>Design & Collaboration</h5>
+                      <h5>Design &amp; Collaboration</h5>
                       <p>
                         Figma, Sketch, Adobe Photoshop / Illustrator, Git,
                         GitHub, GitLab, Jira, stakeholder collaboration
@@ -806,11 +861,11 @@
                       <div class="skills-dashboard__module-heading">
                         <span class="skills-dashboard__index">05 / OPS</span
                         ><span
-                          class="skills-dashboard__node"
                           aria-hidden="true"
+                          class="skills-dashboard__node"
                         ></span>
                       </div>
-                      <h5>Process & Strategy</h5>
+                      <h5>Process &amp; Strategy</h5>
                       <p>
                         Client discovery, requirements and scope definition,
                         information architecture, content modeling, A/B testing,
@@ -824,8 +879,8 @@
                       <div class="skills-dashboard__module-heading">
                         <span class="skills-dashboard__index">06 / OPS</span
                         ><span
-                          class="skills-dashboard__node"
                           aria-hidden="true"
+                          class="skills-dashboard__node"
                         ></span>
                       </div>
                       <h5>AI-Assisted Workflow</h5>
@@ -840,15 +895,14 @@
               </div>
             </details>
           </section>
-
           <!-- EXPERIENCE -->
-          <section id="experience" class="section">
+          <section class="section" id="experience">
             <details class="resume-disclosure">
               <summary class="section__title">
                 <span>03 Experience</span
                 ><span
-                  class="resume-disclosure__icon"
                   aria-hidden="true"
+                  class="resume-disclosure__icon"
                 ></span>
               </summary>
               <div class="section__content">
@@ -857,7 +911,6 @@
                   ><span>MODULE 03 / 04</span>
                 </div>
                 <h3 class="section__label">Experience</h3>
-
                 <div class="job">
                   <div class="job__header">
                     <div class="job__title">Senior Frontend Developer</div>
@@ -890,7 +943,6 @@
                     </li>
                   </ul>
                 </div>
-
                 <div class="job">
                   <div class="job__header">
                     <div class="job__title">
@@ -922,7 +974,6 @@
                     </li>
                   </ul>
                 </div>
-
                 <div class="job">
                   <div class="job__header">
                     <div class="job__title">Frontend Engineer</div>
@@ -951,7 +1002,6 @@
                     </li>
                   </ul>
                 </div>
-
                 <div class="job">
                   <div class="job__header">
                     <div class="job__title">
@@ -991,7 +1041,6 @@
                     </li>
                   </ul>
                 </div>
-
                 <div class="job">
                   <div class="job__header">
                     <div class="job__title">
@@ -1039,15 +1088,14 @@
               </div>
             </details>
           </section>
-
           <!-- EDUCATION -->
-          <section id="section--education" class="section">
+          <section class="section" id="section--education">
             <details class="resume-disclosure">
               <summary class="section__title">
                 <span>04 Education</span
                 ><span
-                  class="resume-disclosure__icon"
                   aria-hidden="true"
+                  class="resume-disclosure__icon"
                 ></span>
               </summary>
               <div class="section__content">
@@ -1056,7 +1104,6 @@
                   ><span>MODULE 04 / 04</span>
                 </div>
                 <h3 class="section__label">Education</h3>
-
                 <div class="education-item">
                   <div class="education-item__details">
                     <div class="education-item__degree">
@@ -1068,11 +1115,10 @@
                   </div>
                   <div class="education-item__year">May 2012</div>
                 </div>
-
                 <div class="education-item">
                   <div class="education-item__details">
                     <div class="education-item__degree">
-                      Studies in Public Relations, Advertising & Applied
+                      Studies in Public Relations, Advertising &amp; Applied
                       Communication
                     </div>
                     <div class="education-item__school">
@@ -1092,19 +1138,19 @@
           <a href="mailto:clair.frontend@gmail.com">Email ↗</a
           ><a
             href="https://linkedin.com/in/developingClair"
-            target="_blank"
             rel="noopener noreferrer"
+            target="_blank"
             >LinkedIn ↗</a
           ><a
             href="https://github.com/SteampunkUnicorn"
-            target="_blank"
             rel="noopener noreferrer"
+            target="_blank"
             >GitHub ↗</a
           >
         </div>
         <a href="#top">Back to top ↑</a>
       </footer>
     </div>
-    <script src="script.js" defer></script>
+    <script defer="" src="script.js"></script>
   </body>
 </html>
