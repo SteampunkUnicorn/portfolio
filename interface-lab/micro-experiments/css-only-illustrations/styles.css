@@ -20,8 +20,14 @@
   filter: hue-rotate(calc((var(--art-hue) - 45) * 1deg));
 }
 .artboard[data-item="sun"] .sun,
+.artboard[data-item="sunset"] .sunset,
+.artboard[data-item="synth"] .synth,
 .artboard[data-item="coffee"] .coffee,
-.artboard[data-item="planet"] .planet {
+.artboard[data-item="steamy-coffee"] .steamy-coffee,
+.artboard[data-item="planet"] .planet,
+.artboard[data-item="mountains"] .mountains,
+.artboard[data-item="rainbow"] .rainbow,
+.artboard[data-item="jelly-art"] .jelly-art {
   display: block;
 }
 .sun-core {
@@ -107,4 +113,394 @@
   box-shadow: 0 3px 0 #937557;
   z-index: 3;
   clip-path: polygon(0 40%, 100% 40%, 100% 100%, 0 100%);
+}
+
+.sunset {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 16px;
+  background:
+    radial-gradient(
+      circle at 50% 60%,
+      #fff1a8 0 28px,
+      rgba(255, 170, 90, 0.55) 29px,
+      transparent 85px
+    ),
+    linear-gradient(#2b1b5e, #c2446b 45%, #ff9a56 60%);
+}
+.sunset::after {
+  content: "";
+  position: absolute;
+  inset: 60% 0 0;
+  background:
+    repeating-linear-gradient(
+        transparent 0 5px,
+        rgba(255, 230, 160, 0.6) 5px 7px
+      )
+      center top / 48px 100% no-repeat,
+    linear-gradient(#3a2a6e, #16143a);
+}
+
+.mountains {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 16px;
+  background:
+    radial-gradient(
+      circle at 74% 26%,
+      #fbf6e4 0 15px,
+      rgba(251, 246, 228, 0.25) 16px 26px,
+      transparent 27px
+    ),
+    radial-gradient(1.5px 1.5px at 18% 14%, #fff 50%, transparent),
+    radial-gradient(1.5px 1.5px at 36% 30%, #fff 50%, transparent),
+    radial-gradient(1.5px 1.5px at 52% 12%, #fff 50%, transparent),
+    radial-gradient(1px 1px at 90% 50%, #fff 50%, transparent),
+    radial-gradient(1.5px 1.5px at 10% 46%, #fff 50%, transparent),
+    linear-gradient(#0b1030, #2a3a7a);
+}
+.mountains::before,
+.mountains::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+}
+.mountains::before {
+  height: 62%;
+  background: linear-gradient(#4a5c9a, #2c3e6b);
+  clip-path: polygon(
+    0 100%,
+    0 58%,
+    24% 18%,
+    44% 62%,
+    64% 28%,
+    100% 72%,
+    100% 100%
+  );
+}
+.mountains::after {
+  height: 40%;
+  background: #141b3d;
+  clip-path: polygon(
+    0 100%,
+    0 70%,
+    20% 45%,
+    48% 82%,
+    74% 40%,
+    100% 78%,
+    100% 100%
+  );
+}
+
+.steamy-coffee {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 16px;
+  background:
+    radial-gradient(
+      circle at 145px 138px,
+      transparent 0 10px,
+      #fffaf2 11px 17px,
+      transparent 18px
+    ),
+    radial-gradient(
+      ellipse 72px 8px at 95px 176px,
+      #d6bc9b 0 100%,
+      transparent 101%
+    ),
+    #f3e3cf;
+}
+.steamy-coffee::before {
+  content: "";
+  position: absolute;
+  left: 50px;
+  top: 108px;
+  width: 90px;
+  height: 66px;
+  border-radius: 6px 6px 40px 40px;
+  background: linear-gradient(90deg, #fffaf2, #efe4d3);
+  box-shadow: inset 0 10px 0 -2px #5a3524;
+}
+.steamy-coffee::after {
+  content: "";
+  position: absolute;
+  left: 66px;
+  top: 52px;
+  width: 8px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(120, 90, 70, 0.4);
+  filter: blur(2px);
+  box-shadow:
+    22px 8px 0 rgba(120, 90, 70, 0.4),
+    44px 0 0 rgba(120, 90, 70, 0.4);
+  animation: steam 3s ease-in-out infinite;
+}
+@keyframes steam {
+  0% {
+    transform: translateY(14px);
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .coffee::after {
+    animation: none;
+  }
+}
+
+.synth {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 16px;
+  background: linear-gradient(#1a0836, #6b1b8f 40%, #ff5fa2 60%);
+}
+.synth::before {
+  content: "";
+  position: absolute;
+  left: 52px;
+  top: 40px;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: linear-gradient(#ffe36b, #ff4fa0);
+  -webkit-mask:
+    linear-gradient(#000 0 50%, transparent 50%) top / 100% 50% no-repeat,
+    repeating-linear-gradient(#000 0 6px, transparent 6px 10px) bottom / 100%
+      50% no-repeat;
+  mask:
+    linear-gradient(#000 0 50%, transparent 50%) top / 100% 50% no-repeat,
+    repeating-linear-gradient(#000 0 6px, transparent 6px 10px) bottom / 100%
+      50% no-repeat;
+}
+.synth::after {
+  content: "";
+  position: absolute;
+  left: -50%;
+  right: -50%;
+  top: 60%;
+  height: 120px;
+  background:
+    linear-gradient(#ff4fd8 2px, transparent 2px) 0 0 / 100% 16px,
+    linear-gradient(90deg, #ff4fd8 2px, transparent 2px) 0 0 / 30px 100%,
+    linear-gradient(#2a0a52, #12052b);
+  transform: perspective(200px) rotateX(60deg);
+  transform-origin: 50% 0;
+}
+
+.rainbow {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 16px;
+  background:
+    radial-gradient(
+      ellipse 150px 34px at 50% 100%,
+      #7fcf95 0 99%,
+      transparent 100%
+    ),
+    linear-gradient(#bfe3ff, #fff0e0);
+}
+.rainbow::before {
+  content: "";
+  position: absolute;
+  left: 15px;
+  top: 35px;
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle closest-side,
+    transparent 0 52%,
+    #ff5a5f 52% 60%,
+    #ff9f45 60% 68%,
+    #ffd93d 68% 76%,
+    #4cc38a 76% 84%,
+    #4d9be6 84% 92%,
+    #8a6fe0 92% 100%,
+    transparent 100%
+  );
+  clip-path: inset(0 0 50% 0);
+}
+.rainbow::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  top: 112px;
+  width: 50px;
+  height: 20px;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow:
+    12px -9px 0 2px #fff,
+    30px -5px 0 0 #fff,
+    128px 0 0 0 #fff,
+    122px -8px 0 2px #fff,
+    140px -12px 0 -4px #fff;
+}
+
+.jelly-art {
+  --bell: #a9a5df;
+  --bell-light: #d2cafa;
+  --tentacle: #8c9cce;
+  position: relative;
+}
+
+.jelly-art * {
+  position: absolute;
+}
+
+.jelly-art .bubble {
+  border: 2px solid #ffffffa8;
+  border-radius: 50%;
+  box-shadow: inset -3px -3px 0 #a9d6dc50;
+}
+.jelly-art .bubble-a {
+  left: 2.2rem;
+  top: 3.5rem;
+  width: 0.8rem;
+  height: 0.8rem;
+}
+.jelly-art .bubble-b {
+  right: 1.4rem;
+  top: 6rem;
+  width: 1.2rem;
+  height: 1.2rem;
+}
+.jelly-art .bubble-c {
+  right: 3rem;
+  bottom: 2.2rem;
+  width: 0.55rem;
+  height: 0.55rem;
+}
+.jelly-art .bell {
+  z-index: 3;
+  left: 3.5rem;
+  top: 3.4rem;
+  width: 11rem;
+  height: 7rem;
+  border-radius: 6rem 6rem 2.5rem 2.5rem;
+  background: linear-gradient(145deg, var(--bell-light), var(--bell) 72%);
+  box-shadow:
+    inset 0.7rem 0.3rem 0 #ffffff50,
+    inset -0.6rem -0.6rem 0 #6f70b72b,
+    0 0.5rem 1rem #7888b02b;
+}
+.jelly-art .bell::before {
+  content: "";
+  left: 0.8rem;
+  top: 1rem;
+  width: 2.2rem;
+  height: 3.6rem;
+  border-radius: 50%;
+  background: #ffffff30;
+  transform: rotate(30deg);
+}
+.jelly-art .frill {
+  z-index: 4;
+  left: 4rem;
+  top: 9.5rem;
+  width: 10rem;
+  height: 1.1rem;
+  border-radius: 0 0 50% 50%;
+  background: repeating-radial-gradient(
+    ellipse at 50% 0,
+    #9a94d4 0 0.5rem,
+    #b9b2ed 0.52rem 1rem
+  );
+}
+.jelly-art .tentacle {
+  z-index: 2;
+  top: 10rem;
+  width: 0.55rem;
+  border-radius: 50% 50% 1rem 1rem;
+  background: linear-gradient(90deg, var(--tentacle), #c0b8ed);
+  transform-origin: top center;
+}
+.jelly-art .tentacle-a {
+  left: 5rem;
+  height: 4.8rem;
+  transform: rotate(9deg);
+}
+.jelly-art .tentacle-b {
+  left: 6.7rem;
+  height: 5.7rem;
+  transform: rotate(-5deg);
+}
+.jelly-art .tentacle-c {
+  left: 8.4rem;
+  height: 4.4rem;
+  transform: rotate(6deg);
+}
+.jelly-art .tentacle-d {
+  left: 10rem;
+  height: 5.4rem;
+  transform: rotate(-8deg);
+}
+.jelly-art .tentacle-e {
+  left: 11.7rem;
+  height: 4.5rem;
+  transform: rotate(5deg);
+}
+.jelly-art .tentacle-f {
+  left: 13rem;
+  height: 3.8rem;
+  transform: rotate(-7deg);
+}
+.jelly-art .shine {
+  z-index: 5;
+  left: 6rem;
+  top: 4.3rem;
+  width: 3rem;
+  height: 0.22rem;
+  border-radius: 50%;
+  background: #ffffff8c;
+  transform: rotate(-15deg);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .jelly-art .bell {
+    animation: jelly-float 4s ease-in-out infinite;
+  }
+  .jelly-art .tentacle-a,
+  .jelly-art .tentacle-c,
+  .jelly-art .tentacle-e {
+    animation: tentacle-sway 3.2s ease-in-out infinite alternate;
+  }
+  .jelly-art .tentacle-b,
+  .jelly-art .tentacle-d,
+  .jelly-art .tentacle-f {
+    animation: tentacle-sway 3.8s ease-in-out infinite alternate-reverse;
+  }
+  @keyframes jelly-float {
+    0%,
+    100% {
+      translate: 0 0;
+    }
+    50% {
+      translate: 0 -7px;
+    }
+  }
+  @keyframes tentacle-sway {
+    from {
+      rotate: -3deg;
+    }
+    to {
+      rotate: 4deg;
+    }
+  }
 }
