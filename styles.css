@@ -148,11 +148,10 @@ h2 {
   #section--skills .skills-grid {
     display: grid;
     grid-template-columns: 110px 1fr;
-    gap: 0.6rem 2rem;
+    gap: 1.5rem 2rem;
   }
 }
 #section--skills .skills-grid__category {
-  font-size: 1.3rem;
   font-weight: var(--weight-body-bold);
   color: var(--tag-fg);
   padding-top: 0.3rem;
@@ -170,15 +169,17 @@ h2 {
   padding-bottom: 0.6rem;
 }
 #section--skills .skills-grid__tag {
-  background: var(--tag-bg);
-  color: var(--tag-fg);
   display: flex;
   align-items: center;
-  font-size: 1.2rem;
   font-weight: 500;
-  padding: 2px 8px;
-  border-radius: 3px;
   white-space: nowrap;
+}
+
+.skills-grid__tag:not(:last-child)::after {
+  content: "•";
+  margin-left: 0.8rem;
+  font-size: 0.75em;
+  opacity: 0.6;
 }
 
 #section--education .section__content {
@@ -243,4 +244,4 @@ h2 {
   color: var(--accent);
   content: "▸ ";
   font-size: 1.6rem;
-}/*# sourceMappingURL=styles.css.map */
+} /*# sourceMappingURL=styles.css.map */
