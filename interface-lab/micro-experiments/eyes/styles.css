@@ -1,0 +1,117 @@
+@import url("../shared.css");
+.ghost-container {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--panel);
+  margin-top: 18px;
+  padding: 24px;
+}
+.ghost {
+  --ghost-color: #fff;
+  --ghost-outline: #14161c;
+
+  position: relative;
+  width: 180px;
+  height: 190px;
+  margin: 40px auto;
+  background: var(--ghost-color);
+  border: 3px solid var(--ghost-outline);
+  border-bottom: 0;
+  border-radius: 90px 90px 0 0;
+  filter: drop-shadow(0 8px 0 rgb(20 22 28 / 8%));
+  animation: ghost-float 3s ease-in-out infinite;
+}
+
+.ghost__mouth {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--ghost-outline);
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.ghost__scallops {
+  position: absolute;
+  top: calc(100% - 2px);
+  left: 0;
+  width: calc(100% + 2px);
+  height: 24px;
+  display: flex;
+  overflow: hidden;
+}
+
+.ghost__scallops span {
+  position: relative;
+  flex: 1 1 20%;
+  min-width: 0;
+  height: 24px;
+}
+
+/* Outline each rounded scallop */
+.ghost__scallops span::after {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: calc(100% - 4px);
+  height: 100%;
+  border: 2px solid var(--ghost-outline);
+  border-top: 0;
+  border-radius: 0 0 50% 50%;
+  pointer-events: none;
+  background: var(--ghost-color);
+}
+
+/* Eyes sit above the ghost's body */
+.eyes {
+  position: absolute;
+  top: 48px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  z-index: 1;
+}
+
+.eye {
+  position: relative;
+  width: 48px;
+  height: 58px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #14161c;
+  overflow: hidden;
+}
+
+.pupil {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 22px;
+  height: 22px;
+  margin: -11px 0 0 -11px;
+  border-radius: 50%;
+  background: #14161c;
+  transition: transform 0.08s linear;
+}
+
+@keyframes ghost-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ghost {
+    animation: none;
+  }
+}

@@ -1,1 +1,0 @@
-@import"../shared.css";.magnetic-wrap{display:grid;place-items:center;gap:28px;text-align:center}.magnet{font:700 clamp(1.2rem,3vw,2rem) var(--heading);padding:23px 32px;border-radius:16px;will-change:transform;box-shadow:0 20px 40px rgba(8,15,20,.5333333333)}.magnetic-wrap .small{max-width:26ch}/*# sourceMappingURL=styles.min.css.map */

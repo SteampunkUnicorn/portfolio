@@ -1,0 +1,36 @@
+@import url("../shared.css");
+.spot-grid {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.spot {
+  position: relative;
+  min-width: 300px;
+  padding: 30px 15px;
+  border-radius: 14px;
+  background: #14161c;
+  color: #e8eaf0;
+  border: 1px solid rgba(140, 150, 190, 0.3);
+  overflow: hidden;
+}
+.spot::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    100px circle at var(--x, 50%) var(--y, 50%),
+    rgba(90, 140, 255, 0.4),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.spot:hover::before {
+  opacity: 1;
+}
+.spot > * {
+  position: relative;
+  margin: 0;
+}

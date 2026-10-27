@@ -1,0 +1,32 @@
+@import url("../shared.css");
+.list {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--panel);
+  padding: 24px;
+}
+.dim-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: min(100%, 300px);
+  font:
+    600 20px/1 system-ui,
+    sans-serif;
+}
+.dim-item {
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(128, 136, 168, 0.35);
+  cursor: pointer;
+  transition:
+    opacity 0.25s,
+    transform 0.25s,
+    filter 0.25s;
+}
+.dim-list:hover .dim-item:not(:hover) {
+  opacity: 0.3;
+  filter: blur(1px);
+}
+.dim-item:hover {
+  transform: translateX(10px);
+}

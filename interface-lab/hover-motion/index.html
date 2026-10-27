@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#0c1b23" />
+    <meta
+      name="description"
+      content="Explore hover transitions, pointer-driven motion, magnetic controls, spotlight effects, and tilt interactions in a hands-on frontend playground."
+    />
+    <title>Hover & Motion Lab — The Interface Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <a class="skip" href="#playground">Skip to playground</a>
+    <div class="shell">
+      <header class="topbar">
+        <a class="back" href="../">← <span>THE INTERFACE LAB</span></a
+        ><span class="topbar__tag">INTERACTION STUDY / 04</span
+        ><a class="topbar__portfolio" href="../../">Portfolio ↗</a>
+      </header>
+      <main>
+        <section class="intro">
+          <p class="eyebrow">
+            <span class="pulse"></span> POINTER / TRANSITIONS / MOTION
+          </p>
+          <h1>Hover <em>with</em><br />intention<span class="dot">.</span></h1>
+          <div class="intro__bottom">
+            <p>
+              Small movements can make an interface feel responsive, tactile,
+              and alive. Tune the behavior, move your pointer, and inspect the
+              difference between a useful response and motion for motion's sake.
+            </p>
+            <div class="intro__index">
+              <span>04</span><span>HOVER & MOTION</span
+              ><span>VANILLA JS + CSS</span>
+            </div>
+          </div>
+        </section>
+        <section
+          class="playground"
+          id="playground"
+          aria-labelledby="play-title"
+        >
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">01 / LIVE PLAYGROUND</p>
+              <h2 id="play-title">Find the feeling<span>.</span></h2>
+            </div>
+            <p>
+              Move your pointer across the stage. Controls update the examples
+              immediately.
+            </p>
+          </div>
+          <div class="control-bar">
+            <div class="control">
+              <label for="motion-style">Interaction</label
+              ><select id="motion-style">
+                <option value="lift">Lift + reveal</option>
+                <option value="tilt">3D tilt</option>
+                <option value="spotlight">Spotlight</option>
+                <option value="magnetic">Magnetic pull</option>
+              </select>
+            </div>
+            <div class="control control--range">
+              <label for="duration"
+                >Duration <output id="duration-value">320 ms</output></label
+              ><input
+                id="duration"
+                type="range"
+                min="100"
+                max="800"
+                step="20"
+                value="320"
+              />
+            </div>
+            <div class="control control--range">
+              <label for="intensity"
+                >Intensity <output id="intensity-value">60%</output></label
+              ><input
+                id="intensity"
+                type="range"
+                min="10"
+                max="100"
+                step="5"
+                value="60"
+              />
+            </div>
+            <button class="reset" id="reset" type="button">
+              Reset controls ↺
+            </button>
+          </div>
+          <div
+            class="stage"
+            id="stage"
+            data-style="lift"
+            aria-label="Interactive hover examples"
+          >
+            <div class="stage__header">
+              <span>LIVE CANVAS</span
+              ><span id="stage-status" aria-live="polite"
+                >MOVE POINTER TO EXPLORE</span
+              ><span class="crosshair" aria-hidden="true">＋</span>
+            </div>
+            <div class="demo-grid" id="demo-grid">
+              <article class="demo-card demo-card--one" tabindex="0">
+                <div class="demo-card__top">
+                  <span>INTERFACE / 01</span
+                  ><span class="mini-arrow" aria-hidden="true">↗</span>
+                </div>
+                <div class="demo-card__art art-orbit" aria-hidden="true">
+                  <i></i><b></b><span></span>
+                </div>
+                <div class="demo-card__body">
+                  <p class="demo-card__kicker">RESPONSE</p>
+                  <h3>Give it a little lift.</h3>
+                  <p>
+                    Layered feedback makes a target feel tangible without
+                    stealing focus.
+                  </p>
+                  <span class="demo-card__link"
+                    >Explore behavior <b aria-hidden="true">→</b></span
+                  >
+                </div>
+              </article>
+              <article class="demo-card demo-card--two" tabindex="0">
+                <div class="demo-card__top">
+                  <span>INTERFACE / 02</span
+                  ><span class="mini-arrow" aria-hidden="true">↗</span>
+                </div>
+                <div class="demo-card__art art-rings" aria-hidden="true">
+                  <i></i><i></i><i></i><b>MOVE<br />THROUGH</b>
+                </div>
+                <div class="demo-card__body">
+                  <p class="demo-card__kicker">DEPTH</p>
+                  <h3>Build a sense of space.</h3>
+                  <p>
+                    Pointer position shifts the perspective. Keep the effect
+                    subtle and bounded.
+                  </p>
+                  <span class="demo-card__link"
+                    >Explore behavior <b aria-hidden="true">→</b></span
+                  >
+                </div>
+              </article>
+              <article class="demo-card demo-card--three" tabindex="0">
+                <div class="demo-card__top">
+                  <span>INTERFACE / 03</span
+                  ><span class="mini-arrow" aria-hidden="true">↗</span>
+                </div>
+                <div class="demo-card__art art-glow" aria-hidden="true">
+                  <span class="glow-orb"></span><span class="glow-line"></span
+                  ><b>FOLLOW<br />THE LIGHT</b>
+                </div>
+                <div class="demo-card__body">
+                  <p class="demo-card__kicker">ATTENTION</p>
+                  <h3>Guide, don't distract.</h3>
+                  <p>
+                    A localized highlight can reveal texture while keeping the
+                    content readable.
+                  </p>
+                  <span class="demo-card__link"
+                    >Explore behavior <b aria-hidden="true">→</b></span
+                  >
+                </div>
+              </article>
+            </div>
+            <div class="stage__footer">
+              <span>CSS TRANSFORMS + POINTER EVENTS</span
+              ><span>KEYBOARD FOCUS IS SUPPORTED</span><span>NO LIBRARIES</span>
+            </div>
+          </div>
+          <p class="stage-note" id="stage-note">
+            Lift + reveal: a restrained translation and a small content reveal
+            provide clear feedback.
+          </p>
+        </section>
+        <section class="principles">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">02 / MOTION PRINCIPLES</p>
+              <h2>Responsive, not restless<span>.</span></h2>
+            </div>
+            <p>
+              Motion is a form of feedback. The goal is to communicate state,
+              not decorate every pixel.
+            </p>
+          </div>
+          <div class="principle-grid">
+            <article>
+              <span class="principle-num">01</span>
+              <h3>Respect the target</h3>
+              <p>
+                Magnetic effects should never pull a control away from its hit
+                area or make the target difficult to activate.
+              </p>
+            </article>
+            <article>
+              <span class="principle-num">02</span>
+              <h3>Keep a way out</h3>
+              <p>
+                Hover should enhance an interface, not hide essential
+                information or make functionality depend on a mouse.
+              </p>
+            </article>
+            <article>
+              <span class="principle-num">03</span>
+              <h3>Honor reduced motion</h3>
+              <p>
+                Pointer-driven movement is disabled when the user requests
+                reduced motion. Keyboard focus remains visible and useful.
+              </p>
+            </article>
+          </div>
+        </section>
+        <section class="inspector">
+          <div>
+            <p class="eyebrow">03 / IMPLEMENTATION NOTES</p>
+            <h2>Choose the right tool<span>.</span></h2>
+            <p>
+              Most hover effects can be built with CSS transitions. Use
+              JavaScript when the effect needs pointer coordinates, and keep
+              those updates scoped to the element being explored.
+            </p>
+          </div>
+          <div class="code-panel">
+            <div class="code-panel__bar">
+              <span>INTERACTION NOTES</span><span>01 — 03</span>
+            </div>
+            <div class="code-row">
+              <span>01</span
+              ><code
+                >transition: transform 320ms cubic-bezier(.2,.8,.2,1);</code
+              >
+            </div>
+            <div class="code-row">
+              <span>02</span
+              ><code>element.style.setProperty('--pointer-x', `${x}%`);</code>
+            </div>
+            <div class="code-row">
+              <span>03</span
+              ><code>@media (prefers-reduced-motion: reduce) { … }</code>
+            </div>
+            <p>
+              These are illustrative patterns, not a copy-ready implementation
+              for every component. Always test actual interaction and focus
+              behavior.
+            </p>
+          </div>
+        </section>
+      </main>
+      <footer>
+        <a href="../">← Back to Interface Lab</a
+        ><span>BUILT IN THE BROWSER / NO FRAMEWORK</span
+        ><a href="../../">PORTFOLIO ↗</a>
+      </footer>
+    </div>
+  </body>
+</html>

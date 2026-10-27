@@ -1,0 +1,51 @@
+@import url("../shared.css");
+
+.cf-stage {
+  position: relative;
+  width: 100%;
+  min-height: 170px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  cursor: none;
+  overflow: hidden;
+}
+.cf-chip {
+  padding: 20px 100px;
+  border-radius: 10px;
+  background: rgba(128, 136, 168, 0.25);
+  font:
+    600 15px system-ui,
+    sans-serif;
+}
+.cf-ring {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid #517e65;
+  display: grid;
+  place-items: center;
+  font:
+    600 12px system-ui,
+    sans-serif;
+  color: #fff;
+  pointer-events: none;
+  opacity: 0;
+  transition:
+    width 0.25s,
+    height 0.25s,
+    background 0.25s,
+    opacity 0.2s;
+}
+.cf-ring.on {
+  opacity: 1;
+}
+.cf-ring.big {
+  width: 76px;
+  height: 76px;
+  background: #517e65;
+}
