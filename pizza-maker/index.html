@@ -3,11 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="An interactive pizza builder and frontend engineering case study by Clair Smith." />
+    <meta
+      name="description"
+      content="An interactive pizza builder and frontend engineering case study by Clair Smith."
+    />
     <title>Pizza Builder — Clair Smith</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="styles/style.min.css" />
     <link rel="stylesheet" href="styles/project-shell.css" />
   </head>
@@ -15,7 +21,12 @@
     <a class="project-skip" href="#main">Skip to content</a>
     <header class="project-header">
       <div class="project-header__inner">
-        <a class="project-header__brand" href="../" aria-label="Clair Smith portfolio homepage">cs<span>.</span> <small>CLAIR SMITH / FRONTEND ENGINEER</small></a>
+        <a
+          class="project-header__brand"
+          href="../"
+          aria-label="Clair Smith portfolio homepage"
+          >cs<span>.</span> <small>CLAIR SMITH / FRONTEND ENGINEER</small></a
+        >
         <nav class="project-header__nav" aria-label="Portfolio navigation">
           <a href="../#work">Work</a>
           <a href="../interface-lab/">Interface Lab</a>
@@ -27,118 +38,183 @@
     <main id="main">
       <section class="project-hero" aria-labelledby="project-title">
         <div class="project-hero__inner">
-          <p class="project-eyebrow">01 / SELECTED WORK <span>—</span> INTERACTIVE EXPERIENCE</p>
+          <p class="project-eyebrow">
+            01 / SELECTED WORK <span>—</span> INTERACTIVE EXPERIENCE
+          </p>
           <div class="project-hero__grid">
             <div>
               <h1 id="project-title">Pizza <em>Builder.</em></h1>
-              <p class="project-hero__lead">A hands-on playground for designing your own pizza—one ingredient at a time.</p>
+              <p class="project-hero__lead">
+                A hands-on playground for designing your own pizza—one
+                ingredient at a time.
+              </p>
             </div>
             <div class="project-hero__aside">
-              <p>Part customization game, part experiment in interaction, state, and layered visual rendering.</p>
+              <p>
+                Part customization game, part experiment in interaction, state,
+                and layered visual rendering.
+              </p>
               <ul class="project-tags" aria-label="Technologies">
-                <li>Vanilla JS</li><li>SCSS</li><li>Data-driven UI</li><li>Pointer Events</li>
+                <li>Vanilla JS</li>
+                <li>SCSS</li>
+                <li>Data-driven UI</li>
+                <li>Pointer Events</li>
               </ul>
             </div>
           </div>
-          <a class="project-hero__jump" href="#play">PLAY THE GAME <span aria-hidden="true">↓</span></a>
+          <a class="project-hero__jump" href="#play"
+            >PLAY THE GAME <span aria-hidden="true">↓</span></a
+          >
         </div>
       </section>
-      <section class="project-experience" id="play" aria-labelledby="game-title">
+      <section
+        class="project-experience"
+        id="play"
+        aria-labelledby="game-title"
+      >
         <div class="project-experience__head">
           <h2 id="game-title">The playground</h2>
           <span>LIVE / INTERACTIVE</span>
         </div>
         <div class="project-experience__frame">
-    <section class="pizza-builder">
-      <nav
-        class="pizza-builder--navigation"
-        aria-label="Pizza building steps"
-      ></nav>
-      <section class="pizza-builder--done">
-        <div class="pizza-builder--done_label">
-          <form class="pizza-builder--name-form">
-            <label for="pizza-name">Name your pizza</label>
+          <section class="pizza-builder">
+            <nav
+              class="pizza-builder--navigation"
+              aria-label="Pizza building steps"
+            ></nav>
+            <section class="pizza-builder--done">
+              <div class="pizza-builder--done_label">
+                <form class="pizza-builder--name-form">
+                  <label for="pizza-name">Name your pizza</label>
 
-            <div class="pizza-builder--name-controls">
-              <input
-                type="text"
-                id="pizza-name"
-                class="pizza-builder--name-input"
-                placeholder="The Midnight Margherita"
-                autocomplete="off"
-                required
-              />
+                  <div class="pizza-builder--name-controls">
+                    <input
+                      type="text"
+                      id="pizza-name"
+                      class="pizza-builder--name-input"
+                      placeholder="The Midnight Margherita"
+                      autocomplete="off"
+                      required
+                    />
 
-              <button type="submit" class="pizza-builder--name-submit">
-                Name It
+                    <button type="submit" class="pizza-builder--name-submit">
+                      Name It
+                    </button>
+                  </div>
+                </form>
+
+                <span class="pizza-builder--pizza-name" hidden></span>
+              </div>
+
+              <div class="pizza-builder--summary">
+                <ul class="pizza-builder--ingredient-list"></ul>
+              </div>
+            </section>
+
+            <div class="pizza-builder--play-surface">
+              <div
+                class="pizza-builder--ingredient-section pizza-builder--size"
+              ></div>
+
+              <div
+                class="pizza-builder--ingredient-section pizza-builder--crust"
+              ></div>
+
+              <div
+                class="pizza-builder--ingredient-section pizza-builder--sauce"
+              ></div>
+
+              <div
+                class="pizza-builder--ingredient-section pizza-builder--cheese"
+              ></div>
+
+              <div
+                class="pizza-builder--ingredient-section pizza-builder--proteins"
+              ></div>
+
+              <div
+                class="pizza-builder--ingredient-section pizza-builder--vegetables"
+              ></div>
+            </div>
+
+            <div class="pizza-builder--table">
+              <div class="pizza-builder--pan">
+                <div class="pizza-builder--built-pizza">
+                  <div
+                    class="pizza-builder--pizza-toppings"
+                    aria-hidden="true"
+                  ></div>
+                </div>
+              </div>
+
+              <button type="button" class="pizza-builder--complete" hidden>
+                Complete Pizza
               </button>
             </div>
-          </form>
-
-          <span class="pizza-builder--pizza-name" hidden></span>
+          </section>
         </div>
-
-        <div class="pizza-builder--summary">
-          <ul class="pizza-builder--ingredient-list"></ul>
-        </div>
-      </section>
-
-      <div class="pizza-builder--play-surface">
-        <div
-          class="pizza-builder--ingredient-section pizza-builder--size"
-        ></div>
-
-        <div
-          class="pizza-builder--ingredient-section pizza-builder--crust"
-        ></div>
-
-        <div
-          class="pizza-builder--ingredient-section pizza-builder--sauce"
-        ></div>
-
-        <div
-          class="pizza-builder--ingredient-section pizza-builder--cheese"
-        ></div>
-
-        <div
-          class="pizza-builder--ingredient-section pizza-builder--proteins"
-        ></div>
-
-        <div
-          class="pizza-builder--ingredient-section pizza-builder--vegetables"
-        ></div>
-      </div>
-
-      <div class="pizza-builder--table">
-        <div class="pizza-builder--pan">
-          <div class="pizza-builder--built-pizza">
-            <div class="pizza-builder--pizza-toppings" aria-hidden="true"></div>
-          </div>
-        </div>
-
-        <button type="button" class="pizza-builder--complete" hidden>
-          Complete Pizza
-        </button>
-      </div>
-    </section>
-
-        </div>
-        <p class="project-experience__caption">Choose a size, crust, sauce, and cheese to get started. Add as many vegetables as you like, then name your creation.</p>
+        <p class="project-experience__caption">
+          Choose a size, crust, sauce, and cheese to get started. Add as many
+          protiens and vegetables as you like, then name your creation.
+        </p>
       </section>
       <section class="project-story" aria-labelledby="story-title">
-        <div class="project-story__heading"><span class="project-eyebrow">02 / BEHIND THE BUILD</span><h2 id="story-title">Playful on the surface.<br /><em>Purposeful underneath.</em></h2></div>
+        <div class="project-story__heading">
+          <span class="project-eyebrow">02 / BEHIND THE BUILD</span>
+          <h2 id="story-title">
+            Playful on the surface.<br /><em>Purposeful underneath.</em>
+          </h2>
+        </div>
         <div class="project-story__grid">
-          <article><span class="project-story__number">01 / THE MODEL</span><h3>Ingredients as data.</h3><p>Steps and choices are generated from JSON, keeping content separate from the component rendering and selection rules.</p></article>
-          <article><span class="project-story__number">02 / THE STATE</span><h3>Constraints that make sense.</h3><p>Single-choice steps replace existing selections, proteins have a limit, and selected ingredients stay in sync with their visual representation.</p></article>
-          <article><span class="project-story__number">03 / THE INTERACTION</span><h3>Multiple ways to build.</h3><p>Desktop users can drag or click ingredients; smaller screens get a select control. The finished composition updates layer by layer.</p></article>
+          <article>
+            <span class="project-story__number">01 / THE MODEL</span>
+            <h3>Ingredients as data.</h3>
+            <p>
+              Steps and choices are generated from JSON, keeping content
+              separate from the component rendering and selection rules.
+            </p>
+          </article>
+          <article>
+            <span class="project-story__number">02 / THE STATE</span>
+            <h3>Constraints that make sense.</h3>
+            <p>
+              Single-choice steps replace existing selections, proteins have a
+              limit, and selected ingredients stay in sync with their visual
+              representation.
+            </p>
+          </article>
+          <article>
+            <span class="project-story__number">03 / THE INTERACTION</span>
+            <h3>Multiple ways to build.</h3>
+            <p>
+              Desktop users can drag or click ingredients; smaller screens get a
+              select control. The finished composition updates layer by layer.
+            </p>
+          </article>
         </div>
       </section>
       <aside class="project-next" aria-label="More projects">
-        <div><span class="project-eyebrow">03 / KEEP EXPLORING</span><h2>More experiments.<br /><em>More curiosity.</em></h2></div>
-        <a href="../interface-lab/">Explore the Interface Lab <span aria-hidden="true">↗</span></a>
+        <div>
+          <span class="project-eyebrow">03 / KEEP EXPLORING</span>
+          <h2>More experiments.<br /><em>More curiosity.</em></h2>
+        </div>
+        <a href="../interface-lab/"
+          >Explore the Interface Lab <span aria-hidden="true">↗</span></a
+        >
       </aside>
     </main>
-    <footer class="project-footer"><span>© 2026 CLAIR SMITH</span><nav aria-label="Footer"><a href="../">Portfolio ↗</a><a href="https://github.com/SteampunkUnicorn/portfolio" target="_blank" rel="noopener noreferrer">Source ↗</a><a href="mailto:clair.frontend@gmail.com">Email ↗</a></nav></footer>
+    <footer class="project-footer">
+      <span>© 2026 CLAIR SMITH</span>
+      <nav aria-label="Footer">
+        <a href="../">Portfolio ↗</a
+        ><a
+          href="https://github.com/SteampunkUnicorn/portfolio"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Source ↗</a
+        ><a href="mailto:clair.frontend@gmail.com">Email ↗</a>
+      </nav>
+    </footer>
 
     <script type="module">
       import { init } from "./js/script.js";
